@@ -12,7 +12,6 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import Switch from '@mui/material/Switch';
-import ListSubheader from '@mui/material/ListSubheader';
 import { d } from 'koration';
 import { Trans, useLingui } from '@lingui/react/macro';
 import { plural, t as translate } from '@lingui/core/macro';
@@ -63,6 +62,7 @@ import { AwaitableComponent } from 'awaitable-component';
 import { convertToAutoBackupFlags, getAutoBackupFlagsInfo } from '@/features/backup/Backup.utils.ts';
 import type { BackupFlagInclusionState } from '@/features/backup/Backup.types.ts';
 import { getDateString } from '@/base/utils/DateHelper.ts';
+import { ListSubheader } from '@/base/components/lists/ListSubheader.tsx';
 
 const convertSyncDataToBackupFlags = (settings: ServerSettingsType): BackupFlagInclusionState => ({
     includeManga: settings.syncDataManga,
@@ -117,6 +117,7 @@ export const ServerSettings = () => {
     const [mutateSettings] = requestManager.useUpdateServerSettings();
 
     const koSyncStatus = requestManager.useKoSyncStatus();
+    const clearWebViewCookiesCache = requestManager.useClearWebViewCookiesCache();
 
     const updateSetting = async <Setting extends keyof ServerSettingsType>(
         setting: Setting,
@@ -744,6 +745,18 @@ export const ServerSettings = () => {
                         onChange={(e) => updateSetting('kcefEnabled', e.target.checked)}
                     />
                 </ListItem>
+                <ListItemButton
+                    onClick={() =>
+                        clearWebViewCookiesCache[0]()
+                            .then(() => makeToast(t`Cleared WebView cookies and cache`, 'success'))
+                            .catch((e) =>
+                                makeToast(t`Could not clear WebView cookies and cache`, 'error', getErrorMessage(e)),
+                            )
+                    }
+                    disabled={clearWebViewCookiesCache[1].loading}
+                >
+                    <ListItemText primary={t`Clear cookies and cache`} />
+                </ListItemButton>
             </List>
             <List
                 subheader={
@@ -773,7 +786,7 @@ export const ServerSettings = () => {
                         secondary={
                             <>
                                 {syncDate && t`Last sync: ${syncDate}`}{' '}
-                                {syncState && t`- State: ${t(SYNC_STATE_TRANSLATION[syncState])}`}
+                                {syncState && t`— State: ${t(SYNC_STATE_TRANSLATION[syncState])}`}
                                 {!!syncStatus?.errorMessage && `\nError: ${syncStatus.errorMessage}`}
                             </>
                         }

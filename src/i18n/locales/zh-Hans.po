@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-01-12T20:43:50.965Z\n"
-"PO-Revision-Date: 2026-07-24 17:01+0000\n"
+"PO-Revision-Date: 2026-09-23 14:51+0000\n"
 "Last-Translator: 無情天 <kofzhanganguo@126.com>\n"
 "Language-Team: Chinese (Simplified Han script) <https://hosted.weblate.org/"
 "projects/suwayomi/suwayomi-webui/zh_Hans/>\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 2026.8.dev0\n"
+"X-Generator: Weblate 2026.10.dev0\n"
 "X-Message-Format: ICU\n"
 
 #. placeholder {0}: serverSettings.flareSolverrSessionTtl
@@ -48,7 +48,7 @@ msgid "A preview focused web frontend built with svelte"
 msgstr "使用 svelte 构建并专注于预览的 Web 前端"
 
 #: src/features/library/components/LibraryOptionsPanel.tsx
-msgid "A-Z"
+msgid "A—Z"
 msgstr "按字母顺序"
 
 #: src/features/navigation-bar/NavigationBar.constants.ts
@@ -118,11 +118,6 @@ msgstr "全部"
 #: src/features/downloads/screens/DownloadSettings.tsx
 msgid "Allow deleting bookmarked chapters"
 msgstr "允许删除已添加书签的章节"
-
-#: src/base/components/inputs/LanguageSelect.tsx
-#: src/features/source/components/SourceLanguageSelect.tsx
-msgid "Allowed Languages"
-msgstr "使用语言"
 
 #: src/features/reader/filters/settings/components/ReaderSettingRGBA.tsx
 msgid "Alpha"
@@ -661,10 +656,6 @@ msgstr "无法从队列中删除所有下载"
 msgid "Could not remove non library manga from categories"
 msgstr "无法从类别中删除非库漫画"
 
-#: src/features/downloads/components/DownloadQueueChapterCard.tsx
-msgid "Could not remove the download from the queue."
-msgstr "无法从队列中删除下载。"
-
 #: src/features/backup/screens/Backup.tsx
 #: src/features/backup/screens/Backup.tsx
 msgid "Could not restore backup"
@@ -1090,7 +1081,7 @@ msgstr "可能的数值示例：1 （字节）、 1KB （千字节）、1MB （�
 
 #: src/features/chapter/components/ChapterExcludeSanlatorsFilter.tsx
 msgid "Exclude scanlators"
-msgstr "排除搬运组"
+msgstr "排除汉化组"
 
 #: src/features/backup/screens/Backup.tsx
 #: src/features/category/components/CategoriesInclusionSetting.tsx
@@ -1172,10 +1163,6 @@ msgstr ""
 "确保已启用自动备份，以防止你的书架丢失！\n"
 "\n"
 "在更改设置后，前往“关于”页面，查找并安装webUI的更新"
-
-#: src/features/settings/screens/Appearance.tsx
-msgid "Feel free to translate the project on"
-msgstr "准确的翻译离不开大家的指正 ->"
 
 #: src/features/downloads/components/DeleteChaptersWhileReadingSetting.tsx
 msgid "Fifth to last read chapter"
@@ -1443,7 +1430,7 @@ msgstr "提示可用的更新"
 
 #: src/features/reader/settings/behaviour/ReaderBehaviourSettings.tsx
 msgid "Inform about changing scanlator on chapter transition"
-msgstr "在章节切换时提示扫描组变更信息"
+msgstr "在章节切换时提示汉化组变更信息"
 
 #: src/features/reader/settings/behaviour/ReaderBehaviourSettings.tsx
 msgid "Inform about missing chapters on chapter transition"
@@ -2345,7 +2332,7 @@ msgstr "缩放类型"
 
 #: src/features/chapter/components/ChapterExcludeSanlatorsFilter.tsx
 msgid "Scanlator"
-msgstr "搬运组"
+msgstr "汉化组"
 
 #: src/features/tracker/components/cards/TrackerActiveCard.tsx
 #: src/features/tracker/components/cards/TrackerMangaCard.tsx
@@ -2756,16 +2743,6 @@ msgstr "登录将由客户端处理。"
 msgid "The login will be handled by the server."
 msgstr "登录将由服务端处理。"
 
-#: src/features/reader/services/ReaderControls.ts
-msgid ""
-"The next chapter has a different scanlator then the current one.\n"
-"Current: {currentScanlator}\n"
-"Next: {nextScanlator}"
-msgstr ""
-"下一章节的扫描组与当前章节的不同。\n"
-"当前章节：{currentScanlator}\n"
-"下一章节：{nextScanlator}"
-
 #: src/features/backup/screens/Backup.tsx
 msgid "The path to the directory on the server where automated backups should get saved in"
 msgstr "服务器上保存自动备份的目录路径"
@@ -2781,16 +2758,6 @@ msgstr "服务器上保存本地源文件的目录路径"
 #: src/features/settings/screens/WebUISettings.tsx
 msgid "The path to the electron installation on the server"
 msgstr "服务器上 Electron 安装的路径"
-
-#: src/features/reader/services/ReaderControls.ts
-msgid ""
-"The previous chapter has a different scanlator then the current one.\n"
-"Previous: {nextScanlator}\n"
-"Current: {currentScanlator}"
-msgstr ""
-"上一章节的扫描组与当前章节的不同。\n"
-"上一章节：{nextScanlator}\n"
-"当前章节：{currentScanlator}"
 
 #: src/features/theme/components/CreateThemeDialog.tsx
 msgid "The theme name must be unique and has a limit of 16 characters"
@@ -3113,10 +3080,6 @@ msgstr "VUI"
 #: src/base/components/feedback/SnackbarWithDescription.tsx
 msgid "Warning"
 msgstr "警告"
-
-#: src/features/settings/screens/Appearance.tsx
-msgid "Weblate"
-msgstr "Weblate"
 
 #: src/features/manga/Manga.constants.ts
 #: src/features/reader/settings/ReaderSettings.constants.tsx
@@ -3782,8 +3745,8 @@ msgstr "当前图源"
 
 #. placeholder {0}: entry.sourceTitle
 #: src/features/migration/components/migration-entry/MigrationDestinationEntry.tsx
-msgid "Destination - {0}"
-msgstr "目标位置 - {0}"
+msgid "Destination — {0}"
+msgstr "目标位置 — {0}"
 
 #: src/features/migration/screens/MigrationExecute.tsx
 msgid "Done"
@@ -3899,8 +3862,8 @@ msgstr "已选择"
 
 #: src/features/migration/components/migration-entry/MigrationSourceEntry.tsx
 #: src/features/migration/components/migration-entry/MigrationSourceEntry.tsx
-msgid "Source entry - {sourceTitle}"
-msgstr "图源作品 - {sourceTitle}"
+msgid "Source entry — {sourceTitle}"
+msgstr "图源作品 — {sourceTitle}"
 
 #: src/features/migration/screens/MigrationSearch.tsx
 msgid "Start migration"
@@ -4246,8 +4209,8 @@ msgstr "你需要添加扩展商店才能安装扩展"
 
 #. placeholder {0}: t(SYNC_STATE_TRANSLATION[syncState])
 #: src/features/settings/screens/ServerSettings.tsx
-msgid "- State: {0}"
-msgstr "- 状态：{0}"
+msgid "— State: {0}"
+msgstr "— 状态：{0}"
 
 #: src/features/settings/screens/ServerSettings.tsx
 msgid "Could not start sync"
@@ -4284,11 +4247,6 @@ msgstr "已开始同步"
 #: src/features/settings/Settings.constants.ts
 msgid "Uploading"
 msgstr "上传中"
-
-#. placeholder {0}: otherChapters.length
-#: src/features/updates/components/ChapterUpdateCard.tsx
-msgid "{0, plural, one {Show # more chapter} other {Show # more chapters}}"
-msgstr "{0, plural, one {显示另外 # 章} other {显示另外 # 章}}"
 
 #: src/features/backup/screens/Backup.tsx
 msgid "Automated backup"
@@ -4373,6 +4331,175 @@ msgstr "调试信息"
 #: src/features/settings/components/DebugInformation.tsx
 msgid "Show"
 msgstr "展示"
+
+#. placeholder {0}: reorders.length
+#: src/features/downloads/screens/DownloadQueue.tsx
+msgid "{0, plural, one {Could not reorder download} other {Could not reorder downloads}}"
+msgstr "{0, plural, one {无法重新排序下载} other {无法重新排序下载}}"
+
+#: src/features/chapter/Chapter.constants.ts
+msgid "{count, plural, one {Could not cancel the download} other {Could not cancel downloads}}"
+msgstr "{count, plural, one {无法取消下载} other {无法取消下载}}"
+
+#: src/features/chapter/Chapter.constants.ts
+msgid "{count, plural, one {Download canceled} other {# downloads canceled}}"
+msgstr "{count, plural, one {下载已取消} other {# 下载已取消}}"
+
+#: src/features/chapter/Chapter.constants.ts
+msgid "{count, plural, one {You are about to cancel one download} other {You are about to cancel # downloads}}"
+msgstr "{count, plural, one {您即将取消一次下载} other {您即将取消 # 次下载}}"
+
+#: src/features/global-search/screens/SearchAll.tsx
+msgid "{libraryMangaCount, plural, one {# entry in library} other {# entries in library}}"
+msgstr "{libraryMangaCount, plural, one {# 个条目在书架中} other {# 个条目在书架中}}"
+
+#: src/features/manga/components/details/MangaNotes.tsx
+msgid "Add a private note about this manga"
+msgstr "添加关于这部漫画的私人备注"
+
+#: src/features/manga/components/details/MangaNotes.tsx
+msgid "Add notes"
+msgstr "添加笔记"
+
+#: src/features/downloads/components/DownloadQueueChapterCard.tsx
+msgid "Cancel all for this series"
+msgstr "取消此系列的所有订阅"
+
+#: src/features/chapter/Chapter.constants.ts
+msgid "Cancel download"
+msgstr "取消下载"
+
+#: src/features/chapter/Chapter.constants.ts
+msgid "Cancel downloads of selected"
+msgstr "取消所选文件的下载"
+
+#: src/features/settings/screens/ServerSettings.tsx
+msgid "Clear cookies and cache"
+msgstr "清除 Cookie 和缓存"
+
+#: src/features/settings/screens/ServerSettings.tsx
+msgid "Cleared WebView cookies and cache"
+msgstr "已清除 WebView cookie 和缓存"
+
+#: src/features/settings/screens/ServerSettings.tsx
+msgid "Could not clear WebView cookies and cache"
+msgstr "无法清除 WebView Cookie 和缓存"
+
+#: src/features/downloads/screens/DownloadQueue.tsx
+msgid "Could not retry failed downloads"
+msgstr "无法重试失败的下载"
+
+#: src/features/manga/components/details/MangaNotes.tsx
+msgid "Could not save notes"
+msgstr "无法保存笔记"
+
+#: src/features/manga/components/details/MangaNotes.tsx
+msgid "Edit notes"
+msgstr "编辑笔记"
+
+#: src/features/manga/components/details/MangaNotes.tsx
+msgid "Notes"
+msgstr "笔记"
+
+#: src/features/manga/components/details/MangaNotes.tsx
+msgid "Notes saved"
+msgstr "已保存的笔记"
+
+#: src/features/reader/settings/general/ReaderGeneralSettings.tsx
+msgid "Fullscreen"
+msgstr "全屏"
+
+#: src/features/downloads/components/DownloadQueueChapterCard.tsx
+msgid "Move series to bottom"
+msgstr "将系列移至底部"
+
+#: src/features/downloads/components/DownloadQueueChapterCard.tsx
+msgid "Move series to top"
+msgstr "将系列移至顶部"
+
+#: src/features/downloads/components/DownloadQueueChapterCard.tsx
+msgid "Move to bottom"
+msgstr "移至底部"
+
+#: src/features/downloads/components/DownloadQueueChapterCard.tsx
+msgid "Move to top"
+msgstr "移至顶部"
+
+#: src/features/downloads/screens/DownloadQueue.tsx
+msgid "Retry all"
+msgstr "全部重试"
+
+#: src/features/manga/components/details/MangaNotes.tsx
+msgid "Clear notes"
+msgstr "清除笔记"
+
+#: src/features/library/components/LibraryOptionsPanel.tsx
+msgid "Could not reset filters"
+msgstr "无法重置筛选器"
+
+#: src/base/components/inputs/LanguageSelect.tsx
+msgid "Enabled languages"
+msgstr "启用语言"
+
+#: src/features/source/components/SourceLanguageSelect.tsx
+msgid "Enabled languages and sources"
+msgstr "启用的语言和源"
+
+#: src/features/settings/screens/Appearance.tsx
+msgid "Feel free to translate the project on Weblate (<0>WebUI</0> and <1>Server</1>)"
+msgstr "欢迎在 Weblate 上翻译此项目 (<0>WebUI</0> 和 <1>Server</1>)"
+
+#: src/features/sync/components/SyncButton.tsx
+msgid "Sync now"
+msgstr "立即同步"
+
+#: src/features/chapter/components/buttons/ChapterCardExpandButton.tsx
+msgid "{count, plural, one {Show # more chapter} other {Show # more chapters}}"
+msgstr "{count, plural, one {显示 # 更多章节} other {显示 # 更多章节}}"
+
+#: src/features/library/components/LibraryOptionsPanel.tsx
+msgid "and"
+msgstr "和"
+
+#: src/features/library/components/LibraryOptionsPanel.tsx
+msgid "Filter mode"
+msgstr "筛选模式"
+
+#: src/features/library/components/LibraryOptionsPanel.tsx
+msgid "or"
+msgstr "或"
+
+#: src/features/library/screens/LibrarySettings.tsx
+msgid "Fuzzy search"
+msgstr "模糊搜索"
+
+#: src/features/library/screens/LibrarySettings.tsx
+msgid "Match the library search even with typos or words in a different order, and show the closest matches first"
+msgstr ""
+"即使存在拼写错误或单词顺序不同，也能匹配书架搜索结果，并优先展示最接近的匹配"
+"项"
+
+#: src/base/components/AppbarSearch.tsx
+msgid "Recent searches"
+msgstr "最近搜索"
+
+#: src/features/reader/services/ReaderControls.ts
+msgid "The next chapter has a different scanlator than the current one.\n"
+"Current: {currentScanlator}\n"
+"Next: {nextScanlator}"
+msgstr ""
+"下一章的汉化组与当前章节不同。\n"
+"当前: {currentScanlator}\n"
+"下一章: {nextScanlator}"
+
+#: src/features/reader/services/ReaderControls.ts
+msgid "The previous chapter has a different scanlator than the current one.\n"
+"Previous: {nextScanlator}\n"
+"Current: {currentScanlator}"
+msgstr ""
+"上一章的汉化组与当前章节不同。\n"
+"上一章: {nextScanlator}\n"
+"当前: {currentScanlator}"
 
 #: src/features/reader/overlay/navigation/desktop/quick-settings/ReaderNavBarDesktopQuickSettings.tsx
 #: src/features/reader/settings/behaviour/ReaderBehaviourSettings.tsx

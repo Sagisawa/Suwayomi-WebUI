@@ -480,6 +480,11 @@ export type ChapterUpdateListFieldsFragment = {
         inLibrary: boolean;
         initialized: boolean;
         sourceId: string;
+        unreadCount: number;
+        downloadCount: number;
+        bookmarkCount: number;
+        hasDuplicateChapters: boolean;
+        chapters: { __typename: 'ChapterNodeList'; totalCount: number };
     };
 };
 
@@ -507,6 +512,11 @@ export type ChapterHistoryListFieldsFragment = {
         inLibrary: boolean;
         initialized: boolean;
         sourceId: string;
+        unreadCount: number;
+        downloadCount: number;
+        bookmarkCount: number;
+        hasDuplicateChapters: boolean;
+        chapters: { __typename: 'ChapterNodeList'; totalCount: number };
     };
 };
 
@@ -811,6 +821,11 @@ export type GetChaptersUpdatesQuery = {
                 inLibrary: boolean;
                 initialized: boolean;
                 sourceId: string;
+                unreadCount: number;
+                downloadCount: number;
+                bookmarkCount: number;
+                hasDuplicateChapters: boolean;
+                chapters: { __typename: 'ChapterNodeList'; totalCount: number };
             };
         }>;
         pageInfo: {
@@ -863,6 +878,11 @@ export type GetChaptersHistoryQuery = {
                 inLibrary: boolean;
                 initialized: boolean;
                 sourceId: string;
+                unreadCount: number;
+                downloadCount: number;
+                bookmarkCount: number;
+                hasDuplicateChapters: boolean;
+                chapters: { __typename: 'ChapterNodeList'; totalCount: number };
             };
         }>;
         pageInfo: {
@@ -926,8 +946,38 @@ export type DownloadTypeFieldsFragment = {
     progress: number;
     state: Types.DownloadState;
     tries: number;
-    chapter: { __typename: 'ChapterType'; id: number; name: string; sourceOrder: number; isDownloaded: boolean };
-    manga: { __typename: 'MangaType'; id: number; title: string; downloadCount: number };
+    position: number;
+    chapter: {
+        __typename: 'ChapterType';
+        isDownloaded: boolean;
+        pageCount: number;
+        id: number;
+        name: string;
+        mangaId: number;
+        scanlator: string | null;
+        realUrl: string | null;
+        sourceOrder: number;
+        chapterNumber: number;
+    };
+    manga: {
+        __typename: 'MangaType';
+        downloadCount: number;
+        id: number;
+        title: string;
+        thumbnailUrl: string | null;
+        thumbnailUrlLastFetched: string | null;
+        inLibrary: boolean;
+        initialized: boolean;
+        sourceId: string;
+        source: {
+            __typename: 'SourceType';
+            id: string;
+            name: string;
+            displayName: string;
+            lang: string;
+            iconUrl: string;
+        } | null;
+    };
 };
 
 export type DownloadStatusFieldsFragment = {
@@ -938,8 +988,38 @@ export type DownloadStatusFieldsFragment = {
         progress: number;
         state: Types.DownloadState;
         tries: number;
-        chapter: { __typename: 'ChapterType'; id: number; name: string; sourceOrder: number; isDownloaded: boolean };
-        manga: { __typename: 'MangaType'; id: number; title: string; downloadCount: number };
+        position: number;
+        chapter: {
+            __typename: 'ChapterType';
+            isDownloaded: boolean;
+            pageCount: number;
+            id: number;
+            name: string;
+            mangaId: number;
+            scanlator: string | null;
+            realUrl: string | null;
+            sourceOrder: number;
+            chapterNumber: number;
+        };
+        manga: {
+            __typename: 'MangaType';
+            downloadCount: number;
+            id: number;
+            title: string;
+            thumbnailUrl: string | null;
+            thumbnailUrlLastFetched: string | null;
+            inLibrary: boolean;
+            initialized: boolean;
+            sourceId: string;
+            source: {
+                __typename: 'SourceType';
+                id: string;
+                name: string;
+                displayName: string;
+                lang: string;
+                iconUrl: string;
+            } | null;
+        };
     }>;
 };
 
@@ -952,18 +1032,41 @@ export type DownloadUpdatesFieldsFragment = {
         type: Types.DownloadUpdateType;
         download: {
             __typename: 'DownloadType';
-            position: number;
             progress: number;
             state: Types.DownloadState;
             tries: number;
+            position: number;
             chapter: {
                 __typename: 'ChapterType';
+                isDownloaded: boolean;
+                pageCount: number;
                 id: number;
                 name: string;
+                mangaId: number;
+                scanlator: string | null;
+                realUrl: string | null;
                 sourceOrder: number;
-                isDownloaded: boolean;
+                chapterNumber: number;
             };
-            manga: { __typename: 'MangaType'; id: number; title: string; downloadCount: number };
+            manga: {
+                __typename: 'MangaType';
+                downloadCount: number;
+                id: number;
+                title: string;
+                thumbnailUrl: string | null;
+                thumbnailUrlLastFetched: string | null;
+                inLibrary: boolean;
+                initialized: boolean;
+                sourceId: string;
+                source: {
+                    __typename: 'SourceType';
+                    id: string;
+                    name: string;
+                    displayName: string;
+                    lang: string;
+                    iconUrl: string;
+                } | null;
+            };
         };
     }>;
 };
@@ -984,14 +1087,38 @@ export type ClearDownloaderMutation = {
                 progress: number;
                 state: Types.DownloadState;
                 tries: number;
+                position: number;
                 chapter: {
                     __typename: 'ChapterType';
+                    isDownloaded: boolean;
+                    pageCount: number;
                     id: number;
                     name: string;
+                    mangaId: number;
+                    scanlator: string | null;
+                    realUrl: string | null;
                     sourceOrder: number;
-                    isDownloaded: boolean;
+                    chapterNumber: number;
                 };
-                manga: { __typename: 'MangaType'; id: number; title: string; downloadCount: number };
+                manga: {
+                    __typename: 'MangaType';
+                    downloadCount: number;
+                    id: number;
+                    title: string;
+                    thumbnailUrl: string | null;
+                    thumbnailUrlLastFetched: string | null;
+                    inLibrary: boolean;
+                    initialized: boolean;
+                    sourceId: string;
+                    source: {
+                        __typename: 'SourceType';
+                        id: string;
+                        name: string;
+                        displayName: string;
+                        lang: string;
+                        iconUrl: string;
+                    } | null;
+                };
             }>;
         };
     } | null;
@@ -1047,14 +1174,38 @@ export type DequeueChapterDownloadMutation = {
                 progress: number;
                 state: Types.DownloadState;
                 tries: number;
+                position: number;
                 chapter: {
                     __typename: 'ChapterType';
+                    isDownloaded: boolean;
+                    pageCount: number;
                     id: number;
                     name: string;
+                    mangaId: number;
+                    scanlator: string | null;
+                    realUrl: string | null;
                     sourceOrder: number;
-                    isDownloaded: boolean;
+                    chapterNumber: number;
                 };
-                manga: { __typename: 'MangaType'; id: number; title: string; downloadCount: number };
+                manga: {
+                    __typename: 'MangaType';
+                    downloadCount: number;
+                    id: number;
+                    title: string;
+                    thumbnailUrl: string | null;
+                    thumbnailUrlLastFetched: string | null;
+                    inLibrary: boolean;
+                    initialized: boolean;
+                    sourceId: string;
+                    source: {
+                        __typename: 'SourceType';
+                        id: string;
+                        name: string;
+                        displayName: string;
+                        lang: string;
+                        iconUrl: string;
+                    } | null;
+                };
             }>;
         };
     } | null;
@@ -1076,14 +1227,38 @@ export type DequeueChapterDownloadsMutation = {
                 progress: number;
                 state: Types.DownloadState;
                 tries: number;
+                position: number;
                 chapter: {
                     __typename: 'ChapterType';
+                    isDownloaded: boolean;
+                    pageCount: number;
                     id: number;
                     name: string;
+                    mangaId: number;
+                    scanlator: string | null;
+                    realUrl: string | null;
                     sourceOrder: number;
-                    isDownloaded: boolean;
+                    chapterNumber: number;
                 };
-                manga: { __typename: 'MangaType'; id: number; title: string; downloadCount: number };
+                manga: {
+                    __typename: 'MangaType';
+                    downloadCount: number;
+                    id: number;
+                    title: string;
+                    thumbnailUrl: string | null;
+                    thumbnailUrlLastFetched: string | null;
+                    inLibrary: boolean;
+                    initialized: boolean;
+                    sourceId: string;
+                    source: {
+                        __typename: 'SourceType';
+                        id: string;
+                        name: string;
+                        displayName: string;
+                        lang: string;
+                        iconUrl: string;
+                    } | null;
+                };
             }>;
         };
     } | null;
@@ -1105,14 +1280,38 @@ export type EnqueueChapterDownloadMutation = {
                 progress: number;
                 state: Types.DownloadState;
                 tries: number;
+                position: number;
                 chapter: {
                     __typename: 'ChapterType';
+                    isDownloaded: boolean;
+                    pageCount: number;
                     id: number;
                     name: string;
+                    mangaId: number;
+                    scanlator: string | null;
+                    realUrl: string | null;
                     sourceOrder: number;
-                    isDownloaded: boolean;
+                    chapterNumber: number;
                 };
-                manga: { __typename: 'MangaType'; id: number; title: string; downloadCount: number };
+                manga: {
+                    __typename: 'MangaType';
+                    downloadCount: number;
+                    id: number;
+                    title: string;
+                    thumbnailUrl: string | null;
+                    thumbnailUrlLastFetched: string | null;
+                    inLibrary: boolean;
+                    initialized: boolean;
+                    sourceId: string;
+                    source: {
+                        __typename: 'SourceType';
+                        id: string;
+                        name: string;
+                        displayName: string;
+                        lang: string;
+                        iconUrl: string;
+                    } | null;
+                };
             }>;
         };
     } | null;
@@ -1134,14 +1333,38 @@ export type EnqueueChapterDownloadsMutation = {
                 progress: number;
                 state: Types.DownloadState;
                 tries: number;
+                position: number;
                 chapter: {
                     __typename: 'ChapterType';
+                    isDownloaded: boolean;
+                    pageCount: number;
                     id: number;
                     name: string;
+                    mangaId: number;
+                    scanlator: string | null;
+                    realUrl: string | null;
                     sourceOrder: number;
-                    isDownloaded: boolean;
+                    chapterNumber: number;
                 };
-                manga: { __typename: 'MangaType'; id: number; title: string; downloadCount: number };
+                manga: {
+                    __typename: 'MangaType';
+                    downloadCount: number;
+                    id: number;
+                    title: string;
+                    thumbnailUrl: string | null;
+                    thumbnailUrlLastFetched: string | null;
+                    inLibrary: boolean;
+                    initialized: boolean;
+                    sourceId: string;
+                    source: {
+                        __typename: 'SourceType';
+                        id: string;
+                        name: string;
+                        displayName: string;
+                        lang: string;
+                        iconUrl: string;
+                    } | null;
+                };
             }>;
         };
     } | null;
@@ -1163,14 +1386,91 @@ export type ReorderChapterDownloadMutation = {
                 progress: number;
                 state: Types.DownloadState;
                 tries: number;
+                position: number;
                 chapter: {
                     __typename: 'ChapterType';
+                    isDownloaded: boolean;
+                    pageCount: number;
                     id: number;
                     name: string;
+                    mangaId: number;
+                    scanlator: string | null;
+                    realUrl: string | null;
                     sourceOrder: number;
-                    isDownloaded: boolean;
+                    chapterNumber: number;
                 };
-                manga: { __typename: 'MangaType'; id: number; title: string; downloadCount: number };
+                manga: {
+                    __typename: 'MangaType';
+                    downloadCount: number;
+                    id: number;
+                    title: string;
+                    thumbnailUrl: string | null;
+                    thumbnailUrlLastFetched: string | null;
+                    inLibrary: boolean;
+                    initialized: boolean;
+                    sourceId: string;
+                    source: {
+                        __typename: 'SourceType';
+                        id: string;
+                        name: string;
+                        displayName: string;
+                        lang: string;
+                        iconUrl: string;
+                    } | null;
+                };
+            }>;
+        };
+    } | null;
+};
+
+export type ReorderChapterDownloadsMutationVariables = Exact<{
+    input: Types.ReorderChapterDownloadsInput;
+}>;
+
+export type ReorderChapterDownloadsMutation = {
+    __typename: 'Mutation';
+    reorderChapterDownloads: {
+        __typename: 'ReorderChapterDownloadPayload';
+        downloadStatus: {
+            __typename: 'DownloadStatus';
+            state: Types.DownloaderState;
+            queue: Array<{
+                __typename: 'DownloadType';
+                progress: number;
+                state: Types.DownloadState;
+                tries: number;
+                position: number;
+                chapter: {
+                    __typename: 'ChapterType';
+                    isDownloaded: boolean;
+                    pageCount: number;
+                    id: number;
+                    name: string;
+                    mangaId: number;
+                    scanlator: string | null;
+                    realUrl: string | null;
+                    sourceOrder: number;
+                    chapterNumber: number;
+                };
+                manga: {
+                    __typename: 'MangaType';
+                    downloadCount: number;
+                    id: number;
+                    title: string;
+                    thumbnailUrl: string | null;
+                    thumbnailUrlLastFetched: string | null;
+                    inLibrary: boolean;
+                    initialized: boolean;
+                    sourceId: string;
+                    source: {
+                        __typename: 'SourceType';
+                        id: string;
+                        name: string;
+                        displayName: string;
+                        lang: string;
+                        iconUrl: string;
+                    } | null;
+                };
             }>;
         };
     } | null;
@@ -1212,14 +1512,38 @@ export type GetDownloadStatusQuery = {
             progress: number;
             state: Types.DownloadState;
             tries: number;
+            position: number;
             chapter: {
                 __typename: 'ChapterType';
+                isDownloaded: boolean;
+                pageCount: number;
                 id: number;
                 name: string;
+                mangaId: number;
+                scanlator: string | null;
+                realUrl: string | null;
                 sourceOrder: number;
-                isDownloaded: boolean;
+                chapterNumber: number;
             };
-            manga: { __typename: 'MangaType'; id: number; title: string; downloadCount: number };
+            manga: {
+                __typename: 'MangaType';
+                downloadCount: number;
+                id: number;
+                title: string;
+                thumbnailUrl: string | null;
+                thumbnailUrlLastFetched: string | null;
+                inLibrary: boolean;
+                initialized: boolean;
+                sourceId: string;
+                source: {
+                    __typename: 'SourceType';
+                    id: string;
+                    name: string;
+                    displayName: string;
+                    lang: string;
+                    iconUrl: string;
+                } | null;
+            };
         }>;
     };
 };
@@ -1239,18 +1563,41 @@ export type DownloadStatusSubscription = {
             type: Types.DownloadUpdateType;
             download: {
                 __typename: 'DownloadType';
-                position: number;
                 progress: number;
                 state: Types.DownloadState;
                 tries: number;
+                position: number;
                 chapter: {
                     __typename: 'ChapterType';
+                    isDownloaded: boolean;
+                    pageCount: number;
                     id: number;
                     name: string;
+                    mangaId: number;
+                    scanlator: string | null;
+                    realUrl: string | null;
                     sourceOrder: number;
-                    isDownloaded: boolean;
+                    chapterNumber: number;
                 };
-                manga: { __typename: 'MangaType'; id: number; title: string; downloadCount: number };
+                manga: {
+                    __typename: 'MangaType';
+                    downloadCount: number;
+                    id: number;
+                    title: string;
+                    thumbnailUrl: string | null;
+                    thumbnailUrlLastFetched: string | null;
+                    inLibrary: boolean;
+                    initialized: boolean;
+                    sourceId: string;
+                    source: {
+                        __typename: 'SourceType';
+                        id: string;
+                        name: string;
+                        displayName: string;
+                        lang: string;
+                        iconUrl: string;
+                    } | null;
+                };
             };
         }>;
     };
@@ -2531,12 +2878,18 @@ export type GetMigratableSourceMangasQuery = {
     };
 };
 
-export type GetLibraryMangaCountQueryVariables = Exact<{ [key: string]: never }>;
+export type GetMangasCountQueryVariables = Exact<{
+    after?: string | null | undefined;
+    before?: string | null | undefined;
+    condition?: Types.MangaConditionInput | null | undefined;
+    filter?: Types.MangaFilterInput | null | undefined;
+    first?: number | null | undefined;
+    last?: number | null | undefined;
+    offset?: number | null | undefined;
+    order?: Array<Types.MangaOrderInput> | Types.MangaOrderInput | null | undefined;
+}>;
 
-export type GetLibraryMangaCountQuery = {
-    __typename: 'Query';
-    mangas: { __typename: 'MangaNodeList'; totalCount: number };
-};
+export type GetMangasCountQuery = { __typename: 'Query'; mangas: { __typename: 'MangaNodeList'; totalCount: number } };
 
 export type UpdateGlobalMetadataMutationVariables = Exact<{
     preUpdateDeleteInput: Types.DeleteGlobalMetasInput;
@@ -2668,6 +3021,13 @@ export type GetAboutQuery = {
         github: string;
         name: string;
         version: string;
+        platformInfo: {
+            __typename: 'PlatformInfo';
+            arch: string;
+            headless: boolean;
+            os: { __typename: 'OSInfo'; name: string; build: string | null; version: string };
+            jvm: { __typename: 'JvmInfo'; javaVersion: string; vmName: string; vmVendor: string; vmVersion: string };
+        };
     };
     aboutWebUI: { __typename: 'AboutWebUI'; channel: Types.WebUiChannel; tag: string; updateTimestamp: string };
 };
@@ -3211,6 +3571,47 @@ export type SourceListFieldsFragment = {
     };
 };
 
+export type CheckboxFieldsFragment = {
+    __typename: 'CheckBoxFilter';
+    name: string;
+    type: 'CheckBoxFilter';
+    CheckBoxFilterDefault: boolean;
+};
+
+export type HeaderFieldsFragment = { __typename: 'HeaderFilter'; name: string; type: 'HeaderFilter' };
+
+export type SelectFieldsFragment = {
+    __typename: 'SelectFilter';
+    name: string;
+    values: Array<string>;
+    type: 'SelectFilter';
+    SelectFilterDefault: number;
+};
+
+export type TriStateFieldsFragment = {
+    __typename: 'TriStateFilter';
+    name: string;
+    type: 'TriStateFilter';
+    TriStateFilterDefault: Types.TriState;
+};
+
+export type TextFieldsFragment = {
+    __typename: 'TextFilter';
+    name: string;
+    type: 'TextFilter';
+    TextFilterDefault: string;
+};
+
+export type SortFieldsFragment = {
+    __typename: 'SortFilter';
+    name: string;
+    values: Array<string>;
+    type: 'SortFilter';
+    SortFilterDefault: { __typename: 'SortSelection'; ascending: boolean; index: number } | null;
+};
+
+export type SeparatorFieldsFragment = { __typename: 'SeparatorFilter'; name: string; type: 'SeparatorFilter' };
+
 export type SourceBrowseFieldsFragment = {
     __typename: 'SourceType';
     homeUrl: string | null;
@@ -3235,7 +3636,92 @@ export type SourceBrowseFieldsFragment = {
                         type: 'CheckBoxFilter';
                         CheckBoxFilterDefault: boolean;
                     }
-                  | { __typename: 'GroupFilter' }
+                  | {
+                        __typename: 'GroupFilter';
+                        name: string;
+                        type: 'GroupFilter';
+                        filters: Array<
+                            | {
+                                  __typename: 'CheckBoxFilter';
+                                  name: string;
+                                  type: 'CheckBoxFilter';
+                                  CheckBoxFilterDefault: boolean;
+                              }
+                            | {
+                                  __typename: 'GroupFilter';
+                                  name: string;
+                                  type: 'GroupFilter';
+                                  filters: Array<
+                                      | {
+                                            __typename: 'CheckBoxFilter';
+                                            name: string;
+                                            type: 'CheckBoxFilter';
+                                            CheckBoxFilterDefault: boolean;
+                                        }
+                                      | { __typename: 'GroupFilter' }
+                                      | { __typename: 'HeaderFilter'; name: string; type: 'HeaderFilter' }
+                                      | {
+                                            __typename: 'SelectFilter';
+                                            name: string;
+                                            values: Array<string>;
+                                            type: 'SelectFilter';
+                                            SelectFilterDefault: number;
+                                        }
+                                      | { __typename: 'SeparatorFilter'; name: string; type: 'SeparatorFilter' }
+                                      | {
+                                            __typename: 'SortFilter';
+                                            name: string;
+                                            values: Array<string>;
+                                            type: 'SortFilter';
+                                            SortFilterDefault: {
+                                                __typename: 'SortSelection';
+                                                ascending: boolean;
+                                                index: number;
+                                            } | null;
+                                        }
+                                      | {
+                                            __typename: 'TextFilter';
+                                            name: string;
+                                            type: 'TextFilter';
+                                            TextFilterDefault: string;
+                                        }
+                                      | {
+                                            __typename: 'TriStateFilter';
+                                            name: string;
+                                            type: 'TriStateFilter';
+                                            TriStateFilterDefault: Types.TriState;
+                                        }
+                                  >;
+                              }
+                            | { __typename: 'HeaderFilter'; name: string; type: 'HeaderFilter' }
+                            | {
+                                  __typename: 'SelectFilter';
+                                  name: string;
+                                  values: Array<string>;
+                                  type: 'SelectFilter';
+                                  SelectFilterDefault: number;
+                              }
+                            | { __typename: 'SeparatorFilter'; name: string; type: 'SeparatorFilter' }
+                            | {
+                                  __typename: 'SortFilter';
+                                  name: string;
+                                  values: Array<string>;
+                                  type: 'SortFilter';
+                                  SortFilterDefault: {
+                                      __typename: 'SortSelection';
+                                      ascending: boolean;
+                                      index: number;
+                                  } | null;
+                              }
+                            | { __typename: 'TextFilter'; name: string; type: 'TextFilter'; TextFilterDefault: string }
+                            | {
+                                  __typename: 'TriStateFilter';
+                                  name: string;
+                                  type: 'TriStateFilter';
+                                  TriStateFilterDefault: Types.TriState;
+                              }
+                        >;
+                    }
                   | { __typename: 'HeaderFilter'; name: string; type: 'HeaderFilter' }
                   | {
                         __typename: 'SelectFilter';
@@ -3550,7 +4036,97 @@ export type GetSourceBrowseQuery = {
                             type: 'CheckBoxFilter';
                             CheckBoxFilterDefault: boolean;
                         }
-                      | { __typename: 'GroupFilter' }
+                      | {
+                            __typename: 'GroupFilter';
+                            name: string;
+                            type: 'GroupFilter';
+                            filters: Array<
+                                | {
+                                      __typename: 'CheckBoxFilter';
+                                      name: string;
+                                      type: 'CheckBoxFilter';
+                                      CheckBoxFilterDefault: boolean;
+                                  }
+                                | {
+                                      __typename: 'GroupFilter';
+                                      name: string;
+                                      type: 'GroupFilter';
+                                      filters: Array<
+                                          | {
+                                                __typename: 'CheckBoxFilter';
+                                                name: string;
+                                                type: 'CheckBoxFilter';
+                                                CheckBoxFilterDefault: boolean;
+                                            }
+                                          | { __typename: 'GroupFilter' }
+                                          | { __typename: 'HeaderFilter'; name: string; type: 'HeaderFilter' }
+                                          | {
+                                                __typename: 'SelectFilter';
+                                                name: string;
+                                                values: Array<string>;
+                                                type: 'SelectFilter';
+                                                SelectFilterDefault: number;
+                                            }
+                                          | { __typename: 'SeparatorFilter'; name: string; type: 'SeparatorFilter' }
+                                          | {
+                                                __typename: 'SortFilter';
+                                                name: string;
+                                                values: Array<string>;
+                                                type: 'SortFilter';
+                                                SortFilterDefault: {
+                                                    __typename: 'SortSelection';
+                                                    ascending: boolean;
+                                                    index: number;
+                                                } | null;
+                                            }
+                                          | {
+                                                __typename: 'TextFilter';
+                                                name: string;
+                                                type: 'TextFilter';
+                                                TextFilterDefault: string;
+                                            }
+                                          | {
+                                                __typename: 'TriStateFilter';
+                                                name: string;
+                                                type: 'TriStateFilter';
+                                                TriStateFilterDefault: Types.TriState;
+                                            }
+                                      >;
+                                  }
+                                | { __typename: 'HeaderFilter'; name: string; type: 'HeaderFilter' }
+                                | {
+                                      __typename: 'SelectFilter';
+                                      name: string;
+                                      values: Array<string>;
+                                      type: 'SelectFilter';
+                                      SelectFilterDefault: number;
+                                  }
+                                | { __typename: 'SeparatorFilter'; name: string; type: 'SeparatorFilter' }
+                                | {
+                                      __typename: 'SortFilter';
+                                      name: string;
+                                      values: Array<string>;
+                                      type: 'SortFilter';
+                                      SortFilterDefault: {
+                                          __typename: 'SortSelection';
+                                          ascending: boolean;
+                                          index: number;
+                                      } | null;
+                                  }
+                                | {
+                                      __typename: 'TextFilter';
+                                      name: string;
+                                      type: 'TextFilter';
+                                      TextFilterDefault: string;
+                                  }
+                                | {
+                                      __typename: 'TriStateFilter';
+                                      name: string;
+                                      type: 'TriStateFilter';
+                                      TriStateFilterDefault: Types.TriState;
+                                  }
+                            >;
+                        }
                       | { __typename: 'HeaderFilter'; name: string; type: 'HeaderFilter' }
                       | {
                             __typename: 'SelectFilter';
@@ -4565,4 +5141,11 @@ export type UserRefreshMutationVariables = Exact<{
 export type UserRefreshMutation = {
     __typename: 'Mutation';
     refreshToken: { __typename: 'RefreshTokenPayload'; accessToken: string };
+};
+
+export type WebviewClearCacheCookiesMutationVariables = Exact<{ [key: string]: never }>;
+
+export type WebviewClearCacheCookiesMutation = {
+    __typename: 'Mutation';
+    clearCookiesAndCache: { __typename: 'ClearCookiesAndCachePayload'; clientMutationId: string | null };
 };

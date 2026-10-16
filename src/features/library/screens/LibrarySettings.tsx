@@ -11,7 +11,7 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import Switch from '@mui/material/Switch';
-import ListSubheader from '@mui/material/ListSubheader';
+import { ListSubheader } from '@/base/components/lists/ListSubheader.tsx';
 import { useLingui } from '@lingui/react/macro';
 import { plural, t as translate } from '@lingui/core/macro';
 import { GlobalUpdateSettings } from '@/features/settings/components/globalUpdate/GlobalUpdateSettings.tsx';
@@ -177,6 +177,17 @@ export function LibrarySettings() {
                         edge="end"
                         checked={settings.ignoreFilters}
                         onChange={(e) => setSettingValue('ignoreFilters', e.target.checked)}
+                    />
+                </ListItem>
+                <ListItem>
+                    <ListItemText
+                        primary={t`Fuzzy search`}
+                        secondary={t`Match the library search even with typos or words in a different order, and show the closest matches first`}
+                    />
+                    <Switch
+                        edge="end"
+                        checked={settings.fuzzySearch}
+                        onChange={(e) => setSettingValue('fuzzySearch', e.target.checked)}
                     />
                 </ListItem>
             </List>

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-01-12T20:43:50.843Z\n"
-"PO-Revision-Date: 2026-07-26 12:01+0000\n"
+"PO-Revision-Date: 2026-09-29 05:51+0000\n"
 "Last-Translator: Damien O'Neil <maxiburning@gmail.com>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/suwayomi/suwayomi-"
 "webui/fr/>\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 2026.8.dev0\n"
+"X-Generator: Weblate 2026.10.dev0\n"
 "X-Message-Format: ICU\n"
 
 #: src/features/navigation-bar/NavigationBar.constants.ts
@@ -32,7 +32,7 @@ msgid "A preview focused web frontend built with svelte"
 msgstr "Une interface web axée sur les préversions, construite avec Svelte"
 
 #: src/features/library/components/LibraryOptionsPanel.tsx
-msgid "A-Z"
+msgid "A—Z"
 msgstr "Ordre alphabétique"
 
 #: src/features/navigation-bar/NavigationBar.constants.ts
@@ -104,11 +104,6 @@ msgstr "Tout"
 #: src/features/downloads/screens/DownloadSettings.tsx
 msgid "Allow deleting bookmarked chapters"
 msgstr "Autoriser la suppression de chapitres ayant un marque-page"
-
-#: src/base/components/inputs/LanguageSelect.tsx
-#: src/features/source/components/SourceLanguageSelect.tsx
-msgid "Allowed Languages"
-msgstr "Langues activées"
 
 #: src/features/reader/filters/settings/components/ReaderSettingRGBA.tsx
 msgid "Alpha"
@@ -596,10 +591,6 @@ msgstr "Impossible de supprimer tous les téléchargements de la file d'attente"
 #: src/features/library/screens/LibrarySettings.tsx
 msgid "Could not remove non library manga from categories"
 msgstr "Impossible de supprimer les mangas hors bibliothèque des catégories"
-
-#: src/features/downloads/components/DownloadQueueChapterCard.tsx
-msgid "Could not remove the download from the queue."
-msgstr "Impossible de supprimer le téléchargement de la file d'attente."
 
 #: src/features/backup/screens/Backup.tsx
 #: src/features/backup/screens/Backup.tsx
@@ -1098,10 +1089,6 @@ msgstr ""
 "Après avoir modifié ce paramètre, allez sur la page \"À propos\" et vérifiez "
 "les mises à jour de l'interface web (WebUI) pour les installer"
 
-#: src/features/settings/screens/Appearance.tsx
-msgid "Feel free to translate the project on"
-msgstr "N'hésitez pas à traduire le projet sur"
-
 #: src/features/downloads/components/DeleteChaptersWhileReadingSetting.tsx
 msgid "Fifth to last read chapter"
 msgstr "Cinquième chapitre à partir du dernier lu"
@@ -1323,7 +1310,8 @@ msgstr "Informer des mises à jour disponibles"
 
 #: src/features/reader/settings/behaviour/ReaderBehaviourSettings.tsx
 msgid "Inform about changing scanlator on chapter transition"
-msgstr "Informer du changement de traducteur lors du passage d'un chapitre à l'autre"
+msgstr ""
+"Informer du changement de traducteur lors de la transition des chapitres"
 
 #: src/features/reader/settings/behaviour/ReaderBehaviourSettings.tsx
 msgid "Inform about missing chapters on chapter transition"
@@ -2568,16 +2556,6 @@ msgstr "La connexion sera gérée par le client."
 msgid "The login will be handled by the server."
 msgstr "La connexion sera gérée par le serveur."
 
-#: src/features/reader/services/ReaderControls.ts
-msgid ""
-"The next chapter has a different scanlator then the current one.\n"
-"Current: {currentScanlator}\n"
-"Next: {nextScanlator}"
-msgstr ""
-"Le chapitre suivant a un traducteur différent de celui du chapitre actuel.\n"
-"Actuel : {currentScanlator}\n"
-"Suivant : {nextScanlator}"
-
 #: src/features/backup/screens/Backup.tsx
 msgid "The path to the directory on the server where automated backups should get saved in"
 msgstr "Le chemin vers le répertoire sur le serveur où les sauvegardes automatiques doivent être enregistrées"
@@ -2593,17 +2571,6 @@ msgstr "Le chemin vers le répertoire sur le serveur où sont enregistrés les f
 #: src/features/settings/screens/WebUISettings.tsx
 msgid "The path to the electron installation on the server"
 msgstr "Le chemin vers l'installation d'Electron sur le serveur"
-
-#: src/features/reader/services/ReaderControls.ts
-msgid ""
-"The previous chapter has a different scanlator then the current one.\n"
-"Previous: {nextScanlator}\n"
-"Current: {currentScanlator}"
-msgstr ""
-"Le chapitre précédent a un traducteur différent de celui du chapitre "
-"actuel.\n"
-"Précédent : {nextScanlator}\n"
-"Actuel : {currentScanlator}"
 
 #: src/features/theme/components/CreateThemeDialog.tsx
 msgid "The theme name must be unique and has a limit of 16 characters"
@@ -2916,10 +2883,6 @@ msgstr "VUI"
 #: src/base/components/feedback/SnackbarWithDescription.tsx
 msgid "Warning"
 msgstr "Avertissement"
-
-#: src/features/settings/screens/Appearance.tsx
-msgid "Weblate"
-msgstr "Weblate"
 
 #: src/features/manga/Manga.constants.ts
 #: src/features/reader/settings/ReaderSettings.constants.tsx
@@ -3564,8 +3527,8 @@ msgstr "Suppression du thème \"{0}\"…"
 
 #. placeholder {0}: entry.sourceTitle
 #: src/features/migration/components/migration-entry/MigrationDestinationEntry.tsx
-msgid "Destination - {0}"
-msgstr "Destination - {0}"
+msgid "Destination — {0}"
+msgstr "Destination — {0}"
 
 #: src/features/settings/components/koreaderSync/KoreaderSyncSettings.tsx
 msgid "Disconnect from KOReader Sync server"
@@ -3980,8 +3943,8 @@ msgid "Source"
 msgstr "Source"
 
 #: src/features/migration/components/migration-entry/MigrationSourceEntry.tsx
-msgid "Source entry - {sourceTitle}"
-msgstr "Entrée source - {sourceTitle}"
+msgid "Source entry — {sourceTitle}"
+msgstr "Entrée source — {sourceTitle}"
 
 #: src/features/migration/screens/MigrationSearch.tsx
 msgid "Start migration"
@@ -4218,8 +4181,8 @@ msgstr "Vous allez supprimer la catégorie \"{0}\""
 
 #. placeholder {0}: t(SYNC_STATE_TRANSLATION[syncState])
 #: src/features/settings/screens/ServerSettings.tsx
-msgid "- State: {0}"
-msgstr "- État : {0}"
+msgid "— State: {0}"
+msgstr "— État : {0}"
 
 #: src/features/extension/store/screens/ExtensionStores.tsx
 msgid "{extensionCount, plural, one {# extension} other {# extensions}}"
@@ -4400,13 +4363,6 @@ msgstr ""
 "Vous devez ajouter un magasin d'extensions avant de pouvoir installer des "
 "extensions"
 
-#. placeholder {0}: otherChapters.length
-#: src/features/updates/components/ChapterUpdateCard.tsx
-msgid "{0, plural, one {Show # more chapter} other {Show # more chapters}}"
-msgstr ""
-"{0, plural, one {Afficher # chapitre de plus} other {Afficher # chapitres de "
-"plus}}"
-
 #: src/features/backup/screens/Backup.tsx
 msgid "Automated backup"
 msgstr "Sauvegarde automatique"
@@ -4455,3 +4411,209 @@ msgstr "Au hasard"
 #: src/features/settings/components/DebugInformation.tsx
 msgid "Show"
 msgstr "Afficher"
+
+#. Used to detect the type of an entry by using it to check if the genre/tags of an entry includes this string. This is NOT shown to any user. Do NOT include any unnecessary text or characters, this will break the type detection (e.g. "MangaInMyLanguage (Manga)")
+#. js-lingui-explicit-id
+#: src/features/manga/Manga.constants.ts
+#, fuzzy
+msgid "entry-type-detection-comic"
+msgstr "BD"
+
+#. Used to detect the type of an entry by using it to check if the genre/tags of an entry includes this string. This is NOT shown to any user. Do NOT include any unnecessary text or characters, this will break the type detection (e.g. "MangaInMyLanguage (Manga)")
+#. js-lingui-explicit-id
+#: src/features/manga/Manga.constants.ts
+msgid "entry-type-detection-manga"
+msgstr "Manga"
+
+#. Used to detect the type of an entry by using it to check if the genre/tags of an entry includes this string. This is NOT shown to any user. Do NOT include any unnecessary text or characters, this will break the type detection (e.g. "MangaInMyLanguage (Manga)")
+#. js-lingui-explicit-id
+#: src/features/manga/Manga.constants.ts
+msgid "entry-type-detection-manhua"
+msgstr "Manhua"
+
+#. Used to detect the type of an entry by using it to check if the genre/tags of an entry includes this string. This is NOT shown to any user. Do NOT include any unnecessary text or characters, this will break the type detection (e.g. "MangaInMyLanguage (Manga)")
+#. js-lingui-explicit-id
+#: src/features/manga/Manga.constants.ts
+msgid "entry-type-detection-manhwa"
+msgstr "Manhwa"
+
+#. Used to detect the type of an entry by using it to check if the genre/tags of an entry includes this string. This is NOT shown to any user. Do NOT include any unnecessary text or characters, this will break the type detection (e.g. "MangaInMyLanguage (Manga)")
+#. js-lingui-explicit-id
+#: src/features/manga/Manga.constants.ts
+msgid "entry-type-detection-webtoon"
+msgstr "Webtoon"
+
+#. placeholder {0}: reorders.length
+#: src/features/downloads/screens/DownloadQueue.tsx
+msgid "{0, plural, one {Could not reorder download} other {Could not reorder downloads}}"
+msgstr ""
+"{0, plural, one {Impossible de réordonner le téléchargement} other "
+"{Impossible de réordonner les téléchargements}}"
+
+#: src/features/chapter/Chapter.constants.ts
+msgid "{count, plural, one {Could not cancel the download} other {Could not cancel downloads}}"
+msgstr ""
+"{count, plural, one {Impossible d'annuler le téléchargement} other "
+"{Impossible d'annuler les téléchargements}}"
+
+#: src/features/chapter/Chapter.constants.ts
+msgid "{count, plural, one {Download canceled} other {# downloads canceled}}"
+msgstr ""
+"{count, plural, one {Téléchargement annulé} other {# téléchargements "
+"annulés}}"
+
+#: src/features/chapter/Chapter.constants.ts
+msgid "{count, plural, one {You are about to cancel one download} other {You are about to cancel # downloads}}"
+msgstr ""
+"{count, plural, one {Vous allez annuler un téléchargement} other {Vous allez "
+"annuler # téléchargements}}"
+
+#: src/features/global-search/screens/SearchAll.tsx
+msgid "{libraryMangaCount, plural, one {# entry in library} other {# entries in library}}"
+msgstr ""
+"{libraryMangaCount, plural, one {# entrée dans la bibliothèque} other {# "
+"entrées dans la bibliothèque}}"
+
+#: src/features/manga/components/details/MangaNotes.tsx
+msgid "Add a private note about this manga"
+msgstr "Ajouter une note personnelle à ce manga"
+
+#: src/features/manga/components/details/MangaNotes.tsx
+msgid "Add notes"
+msgstr "Ajouter des notes"
+
+#: src/features/downloads/components/DownloadQueueChapterCard.tsx
+msgid "Cancel all for this series"
+msgstr "Tout annuler pour cette série"
+
+#: src/features/chapter/Chapter.constants.ts
+msgid "Cancel download"
+msgstr "Annuler le téléchargement"
+
+#: src/features/chapter/Chapter.constants.ts
+msgid "Cancel downloads of selected"
+msgstr "Annuler les téléchargements de la sélection"
+
+#: src/features/settings/screens/ServerSettings.tsx
+msgid "Clear cookies and cache"
+msgstr "Vider les cookies et le cache"
+
+#: src/features/settings/screens/ServerSettings.tsx
+msgid "Cleared WebView cookies and cache"
+msgstr "Cookies et cache de WebView vidés"
+
+#: src/features/settings/screens/ServerSettings.tsx
+msgid "Could not clear WebView cookies and cache"
+msgstr "Impossible de vider les cookies et cache de WebView"
+
+#: src/features/downloads/screens/DownloadQueue.tsx
+msgid "Could not retry failed downloads"
+msgstr "Impossible de relancer les téléchargements échoués"
+
+#: src/features/manga/components/details/MangaNotes.tsx
+msgid "Could not save notes"
+msgstr "Impossible d'enregistrer les notes"
+
+#: src/features/manga/components/details/MangaNotes.tsx
+msgid "Edit notes"
+msgstr "Modifier les notes"
+
+#: src/features/reader/settings/general/ReaderGeneralSettings.tsx
+msgid "Fullscreen"
+msgstr "Plein écran"
+
+#: src/features/downloads/components/DownloadQueueChapterCard.tsx
+msgid "Move series to bottom"
+msgstr "Déplacer la série vers le bas"
+
+#: src/features/downloads/components/DownloadQueueChapterCard.tsx
+msgid "Move series to top"
+msgstr "Déplacer la série vers le haut"
+
+#: src/features/downloads/components/DownloadQueueChapterCard.tsx
+msgid "Move to bottom"
+msgstr "Déplacer vers le bas"
+
+#: src/features/downloads/components/DownloadQueueChapterCard.tsx
+msgid "Move to top"
+msgstr "Déplacer vers le haut"
+
+#: src/features/manga/components/details/MangaNotes.tsx
+msgid "Notes"
+msgstr "Notes"
+
+#: src/features/manga/components/details/MangaNotes.tsx
+msgid "Notes saved"
+msgstr "Notes enregistrées"
+
+#: src/features/downloads/screens/DownloadQueue.tsx
+msgid "Retry all"
+msgstr "Tout réessayer"
+
+#: src/features/manga/components/details/MangaNotes.tsx
+msgid "Clear notes"
+msgstr "Effacer les notes"
+
+#: src/features/library/components/LibraryOptionsPanel.tsx
+msgid "Could not reset filters"
+msgstr "Impossible de réinitialiser les filtres"
+
+#: src/base/components/inputs/LanguageSelect.tsx
+msgid "Enabled languages"
+msgstr "Langues activées"
+
+#: src/features/source/components/SourceLanguageSelect.tsx
+msgid "Enabled languages and sources"
+msgstr "Langues et sources activées"
+
+#: src/features/settings/screens/Appearance.tsx
+msgid "Feel free to translate the project on Weblate (<0>WebUI</0> and <1>Server</1>)"
+msgstr ""
+"N'hésitez pas à traduire le projet sur Weblate (<0>Interface web (WebUI)</0> "
+"et <1>Serveur</1>)"
+
+#: src/features/sync/components/SyncButton.tsx
+msgid "Sync now"
+msgstr "Synchroniser maintenant"
+
+#: src/features/chapter/components/buttons/ChapterCardExpandButton.tsx
+msgid "{count, plural, one {Show # more chapter} other {Show # more chapters}}"
+msgstr ""
+"{count, plural, one {Afficher # chapitre de plus} other {Afficher # "
+"chapitres de plus}}"
+
+#: src/features/library/components/LibraryOptionsPanel.tsx
+msgid "Filter mode"
+msgstr "Mode de filtrage"
+
+#: src/features/library/screens/LibrarySettings.tsx
+msgid "Fuzzy search"
+msgstr "Recherche approximative"
+
+#: src/features/library/screens/LibrarySettings.tsx
+msgid "Match the library search even with typos or words in a different order, and show the closest matches first"
+msgstr ""
+"Effectue une recherche dans la bibliothèque même avec des fautes ou des mots "
+"dans le désordre, et vous montre les correspondances les plus proches"
+
+#: src/base/components/AppbarSearch.tsx
+msgid "Recent searches"
+msgstr "Recherches récentes"
+
+#: src/features/reader/services/ReaderControls.ts
+msgid "The next chapter has a different scanlator than the current one.\n"
+"Current: {currentScanlator}\n"
+"Next: {nextScanlator}"
+msgstr ""
+"Le chapitre suivant a été traduit par un groupe différent de l'actuel.\n"
+"Actuel : {currentScanlator}\n"
+"Suivant : {nextScanlator}"
+
+#: src/features/reader/services/ReaderControls.ts
+msgid "The previous chapter has a different scanlator than the current one.\n"
+"Previous: {nextScanlator}\n"
+"Current: {currentScanlator}"
+msgstr ""
+"Le chapitre précédent a été traduit par un groupe différent de l'actuel.\n"
+"Précédent : {nextScanlator}\n"
+"Actuel : {currentScanlator}"

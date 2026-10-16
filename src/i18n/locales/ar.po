@@ -22,8 +22,8 @@ msgid "{progress}% | Updating…"
 msgstr "{progress}% | جارٍ التحديث…"
 
 #: src/features/library/components/LibraryOptionsPanel.tsx
-msgid "A-Z"
-msgstr "أ–ي"
+msgid "A—Z"
+msgstr "أ—ي"
 
 #: src/features/navigation-bar/NavigationBar.constants.ts
 #: src/features/settings/screens/About.tsx
@@ -76,11 +76,6 @@ msgstr "الجميع"
 #: src/features/downloads/screens/DownloadSettings.tsx
 msgid "Allow deleting bookmarked chapters"
 msgstr "السماح بحذف الفصول ذات الإشارة المرجعية"
-
-#: src/base/components/inputs/LanguageSelect.tsx
-#: src/features/source/components/SourceLanguageSelect.tsx
-msgid "Allowed Languages"
-msgstr "اللغات المسموح بها"
 
 #: src/features/chapter/services/Chapters.ts
 #: src/features/manga/hooks/useManageMangaLibraryState.tsx
@@ -458,10 +453,6 @@ msgstr "تعذر إزالة جميع التنزيلات من قائمة الان
 msgid "Could not remove non library manga from categories"
 msgstr "تعذر إزالة المانجا غير الموجودة في المكتبة من الفئات"
 
-#: src/features/downloads/components/DownloadQueueChapterCard.tsx
-msgid "Could not remove the download from the queue."
-msgstr "تعذر إزالة التنزيل من قائمة الانتظار."
-
 #: src/features/backup/screens/Backup.tsx
 #: src/features/backup/screens/Backup.tsx
 msgid "Could not restore backup"
@@ -772,10 +763,6 @@ msgstr ""
 "\n"
 "بعد تغيير هذا الإعداد، انتقل إلى صفحة \"حول\" (About) للتحقق من وجود تحديث "
 "لواجهة الويب (WebUI) وتثبيته"
-
-#: src/features/settings/screens/Appearance.tsx
-msgid "Feel free to translate the project on"
-msgstr "لا تتردد في المساهمة في ترجمة المشروع عبر"
 
 #: src/features/downloads/components/DeleteChaptersWhileReadingSetting.tsx
 msgid "Fifth to last read chapter"
@@ -1680,16 +1667,6 @@ msgstr "الفئة فارغة"
 msgid "The following sources are not installed:"
 msgstr "المصادر التالية غير مثبتة:"
 
-#: src/features/reader/services/ReaderControls.ts
-msgid ""
-"The next chapter has a different scanlator then the current one.\n"
-"Current: {currentScanlator}\n"
-"Next: {nextScanlator}"
-msgstr ""
-"الفصل التالي من فريق ترجمة مختلف عن الفصل الحالي.\n"
-"الحالي: {currentScanlator}\n"
-"التالي: {nextScanlator}"
-
 #: src/features/backup/screens/Backup.tsx
 msgid "The path to the directory on the server where automated backups should get saved in"
 msgstr "المسار على الخادم حيث يجب حفظ النسخ الاحتياطية التلقائية"
@@ -1705,16 +1682,6 @@ msgstr "المسار على الخادم حيث يتم حفظ ملفات الم�
 #: src/features/settings/screens/WebUISettings.tsx
 msgid "The path to the electron installation on the server"
 msgstr "مسار تثبيت Electron على الخادم"
-
-#: src/features/reader/services/ReaderControls.ts
-msgid ""
-"The previous chapter has a different scanlator then the current one.\n"
-"Previous: {nextScanlator}\n"
-"Current: {currentScanlator}"
-msgstr ""
-"الفصل السابق من فريق ترجمة مختلف عن الفصل الحالي.\n"
-"السابق: {nextScanlator}\n"
-"الحالي: {currentScanlator}"
 
 #: src/features/downloads/components/DeleteChaptersWhileReadingSetting.tsx
 msgid "Third to last read chapter"
@@ -1923,10 +1890,6 @@ msgstr "عمودي"
 #: src/base/components/feedback/SnackbarWithDescription.tsx
 msgid "Warning"
 msgstr "تحذير"
-
-#: src/features/settings/screens/Appearance.tsx
-msgid "Weblate"
-msgstr "ويبلايت (Weblate)"
 
 #: src/features/reader/settings/ReaderSettings.constants.tsx
 msgid "Webtoon"

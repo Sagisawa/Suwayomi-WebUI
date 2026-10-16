@@ -20,6 +20,7 @@ export type AboutServerPayload = {
     discord: Scalars['String']['output'];
     github: Scalars['String']['output'];
     name: Scalars['String']['output'];
+    platformInfo: PlatformInfo;
     /** @deprecated The version includes the revision as the patch number */
     revision: Scalars['String']['output'];
     version: Scalars['String']['output'];
@@ -216,6 +217,11 @@ export type ChapterConditionInput = {
     url?: InputMaybe<Scalars['String']['input']>;
 };
 
+export type ChapterDownloadReorderInput = {
+    chapterId: Scalars['Int']['input'];
+    to: Scalars['Int']['input'];
+};
+
 export type ChapterEdge = Edge & {
     __typename?: 'ChapterEdge';
     cursor: Scalars['Cursor']['output'];
@@ -341,6 +347,15 @@ export type ClearCachedImagesPayload = {
     cachedThumbnails?: Maybe<Scalars['Boolean']['output']>;
     clientMutationId?: Maybe<Scalars['String']['output']>;
     downloadedThumbnails?: Maybe<Scalars['Boolean']['output']>;
+};
+
+export type ClearCookiesAndCacheInput = {
+    clientMutationId?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type ClearCookiesAndCachePayload = {
+    __typename?: 'ClearCookiesAndCachePayload';
+    clientMutationId?: Maybe<Scalars['String']['output']>;
 };
 
 export type ClearDownloaderInput = {
@@ -762,6 +777,7 @@ export type ExtensionConditionInput = {
     iconUrl?: InputMaybe<Scalars['String']['input']>;
     isInstalled?: InputMaybe<Scalars['Boolean']['input']>;
     isObsolete?: InputMaybe<Scalars['Boolean']['input']>;
+    jarUrl?: InputMaybe<Scalars['String']['input']>;
     lang?: InputMaybe<Scalars['String']['input']>;
     name?: InputMaybe<Scalars['String']['input']>;
     pkgName?: InputMaybe<Scalars['String']['input']>;
@@ -787,6 +803,7 @@ export type ExtensionFilterInput = {
     iconUrl?: InputMaybe<StringFilterInput>;
     isInstalled?: InputMaybe<BooleanFilterInput>;
     isObsolete?: InputMaybe<BooleanFilterInput>;
+    jarUrl?: InputMaybe<StringFilterInput>;
     lang?: InputMaybe<StringFilterInput>;
     name?: InputMaybe<StringFilterInput>;
     not?: InputMaybe<ExtensionFilterInput>;
@@ -882,6 +899,7 @@ export type ExtensionType = {
     /** @deprecated Removed in extension api v1.6, replace with contentWarning */
     isNsfw: Scalars['Boolean']['output'];
     isObsolete: Scalars['Boolean']['output'];
+    jarUrl?: Maybe<Scalars['String']['output']>;
     lang: Scalars['String']['output'];
     name: Scalars['String']['output'];
     pkgName: Scalars['String']['output'];
@@ -1072,6 +1090,14 @@ export type IntFilterInput = {
     notEqualToAll?: InputMaybe<Array<Scalars['Int']['input']>>;
     notEqualToAny?: InputMaybe<Array<Scalars['Int']['input']>>;
     notIn?: InputMaybe<Array<Scalars['Int']['input']>>;
+};
+
+export type JvmInfo = {
+    __typename?: 'JvmInfo';
+    javaVersion: Scalars['String']['output'];
+    vmName: Scalars['String']['output'];
+    vmVendor: Scalars['String']['output'];
+    vmVersion: Scalars['String']['output'];
 };
 
 export type KoSyncConnectPayload = {
@@ -1442,6 +1468,7 @@ export type Mutation = {
     bindTrack: BindTrackPayload;
     bindTrackRecord?: Maybe<BindTrackRecordPayload>;
     clearCachedImages: ClearCachedImagesPayload;
+    clearCookiesAndCache: ClearCookiesAndCachePayload;
     clearDownloader?: Maybe<ClearDownloaderPayload>;
     connectKoSyncAccount: KoSyncConnectPayload;
     createBackup: CreateBackupPayload;
@@ -1483,6 +1510,7 @@ export type Mutation = {
     refreshToken: RefreshTokenPayload;
     removeExtensionStore?: Maybe<RemoveExtensionStorePayload>;
     reorderChapterDownload?: Maybe<ReorderChapterDownloadPayload>;
+    reorderChapterDownloads?: Maybe<ReorderChapterDownloadPayload>;
     resetSettings: ResetSettingsPayload;
     resetWebUIUpdateStatus?: Maybe<WebUiUpdateStatus>;
     restoreBackup: RestoreBackupPayload;
@@ -1536,6 +1564,10 @@ export type MutationBindTrackRecordArgs = {
 
 export type MutationClearCachedImagesArgs = {
     input: ClearCachedImagesInput;
+};
+
+export type MutationClearCookiesAndCacheArgs = {
+    input?: InputMaybe<ClearCookiesAndCacheInput>;
 };
 
 export type MutationClearDownloaderArgs = {
@@ -1692,6 +1724,10 @@ export type MutationRemoveExtensionStoreArgs = {
 
 export type MutationReorderChapterDownloadArgs = {
     input: ReorderChapterDownloadInput;
+};
+
+export type MutationReorderChapterDownloadsArgs = {
+    input: ReorderChapterDownloadsInput;
 };
 
 export type MutationResetSettingsArgs = {
@@ -1866,6 +1902,13 @@ export type NodeList = {
     pageInfo: PageInfo;
     /** The count of all nodes you could get from the connection. */
     totalCount: Scalars['Int']['output'];
+};
+
+export type OsInfo = {
+    __typename?: 'OSInfo';
+    build?: Maybe<Scalars['String']['output']>;
+    name: Scalars['String']['output'];
+    version: Scalars['String']['output'];
 };
 
 export type PageInfo = {
@@ -2087,6 +2130,14 @@ export type PartialSettingsTypeInput = {
     webUIFlavor?: InputMaybe<WebUiFlavor>;
     webUIInterface?: InputMaybe<WebUiInterface>;
     webUIUpdateCheckInterval?: InputMaybe<Scalars['Float']['input']>;
+};
+
+export type PlatformInfo = {
+    __typename?: 'PlatformInfo';
+    arch: Scalars['String']['output'];
+    headless: Scalars['Boolean']['output'];
+    jvm: JvmInfo;
+    os: OsInfo;
 };
 
 export type Preference =
@@ -2336,6 +2387,11 @@ export type ReorderChapterDownloadPayload = {
     __typename?: 'ReorderChapterDownloadPayload';
     clientMutationId?: Maybe<Scalars['String']['output']>;
     downloadStatus: DownloadStatus;
+};
+
+export type ReorderChapterDownloadsInput = {
+    clientMutationId?: InputMaybe<Scalars['String']['input']>;
+    reorders: Array<ChapterDownloadReorderInput>;
 };
 
 export type ResetSettingsInput = {

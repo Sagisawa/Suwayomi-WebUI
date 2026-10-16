@@ -138,9 +138,14 @@ export function Extensions({ tabsMenuHeight }: { tabsMenuHeight: number }) {
     const allExtensions = data?.fetchExtensions?.extensions ?? STABLE_EMPTY_ARRAY;
     const allLangs = useMemo(() => getLanguagesFromExtensions(allExtensions), [allExtensions]);
 
+    const unsearchedFilteredExtensions = useMemo(
+        () => filterExtensions(allExtensions, { selectedLanguages: shownLangs, showNsfw }),
+        [allExtensions, shownLangs, showNsfw],
+    );
+
     const filteredExtensions = useMemo(
-        () => filterExtensions(allExtensions, { selectedLanguages: shownLangs, showNsfw, query }),
-        [allExtensions, shownLangs, showNsfw, query],
+        () => filterExtensions(unsearchedFilteredExtensions, { query }),
+        [unsearchedFilteredExtensions, query],
     );
     const groupedExtensions = useMemo(() => groupExtensionsByLanguage(filteredExtensions), [filteredExtensions]);
     const groupCounts = useMemo(
@@ -150,6 +155,11 @@ export function Extensions({ tabsMenuHeight }: { tabsMenuHeight: number }) {
     const visibleExtensions = useMemo(
         () => groupedExtensions.flatMap(([, extensions]) => extensions),
         [groupedExtensions],
+    );
+
+    const visibleExtensionNames = useMemo(
+        () => unsearchedFilteredExtensions.map((extension) => extension.name),
+        [unsearchedFilteredExtensions],
     );
 
     const areReposDefined = !!extensionStoresRequest.data?.extensionStores.totalCount;
@@ -193,7 +203,7 @@ export function Extensions({ tabsMenuHeight }: { tabsMenuHeight: number }) {
 
     useAppAction(
         <>
-            <AppbarSearch />
+            <AppbarSearch searchHistoryKey="extensions" suggestions={visibleExtensionNames} />
             <CustomTooltip title={t`Install external extension`}>
                 <IconButton
                     onClick={() => {
@@ -225,7 +235,7 @@ export function Extensions({ tabsMenuHeight }: { tabsMenuHeight: number }) {
                 languages={allLangs}
             />
         </>,
-        [t, shownLangs, allLangs],
+        [t, shownLangs, allLangs, visibleExtensionNames],
     );
 
     useWindowEvent('drop', async (e) => {

@@ -8,15 +8,84 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Added
 
-- .
+-
 
 ### Changed
 
-- .
+-
 
 ### Fixed
 
-- .
+-
+
+## [20260929.01] (r3518) - 2026-09-29
+
+### Added
+
+- (**Global/Search**) Increase appbar search width when active
+- (**Global/Search**) Remember submitted searches and offer them in the search bar, each removable from the dropdown
+- (**Manga**) Add per-manga notes
+- (**Download**) Add button to retry all failed downloads
+- (**Reader**) Add fullscreen setting (does nothing on iOS)
+- (**Library**) Add `reset` button to library filters
+- (**Library**) Add option to apply `tracker` filter either with `AND` or `OR` logic
+- (**Library**) Add fuzzy search, which tolerates typos and words in a different order and shows the closest matches first. Can be turned off in the library settings
+- (**Library**) Add autocomplete to the search bar, suggesting the entries of the category that is being searched. Pressing `tab` selects the suggested live auto-completion
+- (**Sync**) Add sync button to the app bar of the library and updates pages
+- (**Browse/Extension**) Add search suggestions to extensions browse tab
+
+### Changed
+
+- (**Extension**) Install extension when clicking card of uninstalled extension
+- (**Extension**) Show sources of extension as disabled in case the language itself is disabled. Enabling such a source will enable the language as well
+- (**Extension/Source**) Keep language filter sorting stable while changes are temporary
+- (**Extension/Source**) Additionally, show the english name of a language in the language filter
+- (**Updates/History/Downloads**) Show scanlator of chapter
+- (**Updates**) Improve render performance of the collapsed more updates
+- (**Migration**) Improve render performance of the migration search and execution page
+- (**Migration**) Show source id for missing source title for source entries
+- (**Library**) Prevent randomizing category sort order everytime category gets opened
+- (**Library**) Apply `source/tracker/status` filter using `OR` logic. I.e., show entries that are from any of the included `source/tracker/status`
+- (**Reader**) Open the first page when going to the previous chapter
+- (**Download**) Group downloads by source
+- (**Download**) Add series bulk actions
+- (**Download**) Make downloads cancelable outside the download queue page
+- (**Global search**) Show count of entries in the library of each source
+- (**Manga**) Show description as markdown
+- (**Appearance**) Additionally, show the english name of a language in the language select dropdown
+- (**History**) Show the last read chapter per manga per day
+
+### Fixed
+
+- (**Browse**) Fix filtering with nested group changes
+- (**Library**) Fix source filter potentially causing all manga to get filtered out
+- (**Chapter**) Fix missing chapters before the first available one not being considered in the total missing chapter count (Example: chapters 1-5 are missing, first available chapter is 6. Chapters 1-5 weren't counted as missing in the total missing chapter amount)
+- (**Reader**) Fix invisible transition page text
+- (**Category**) Fix being unable to type a trailing space while editing the category name
+- (**Migration**) Fix not respecting the next higher priority source for match selection
+
+### Translations
+
+Feel free to translate the project on [Weblate](https://hosted.weblate.org/projects/suwayomi/suwayomi-webui/)
+
+Thanks to everyone that contributed to the translation of this project.
+
+#### Added
+
+- Catalan (by Kisnov)
+
+#### Updated
+
+- Indonesian (by Arif Budiman)
+- Hebrew (by CyberMageIL)
+- French (by Damien O'Neil)
+- German (by Constantin Piber)
+- Portuguese (by Herta)
+- Chinese (Simplified) (by 無情天)
+- Polish (by UnknownSkyrimPasserby)
+- Russian (by Sazuru)
+- Vietnamese (by Durin)
+- Chinese (Traditional) (by js850604)
 
 ## [20260726.01] (r3379) - 2026-07-26
 
@@ -24,6 +93,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 - (**Manga**) Add share button (secure context (localhost, https))
 - (**Reader**) Add share button to desktop navigation bar (secure context (localhost, https))
+- (**Library**) Show filtered item count in active category tab
 
 ### Changed
 
@@ -34,6 +104,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Fixed
 
+- (**Global**) Fix local and session storage being shared between instances on the same domain with different subpaths
 - (**Reader**) Fix electron asking for "wake lock" permission even with the "Keep screen on" setting disabled
 - (**Reader**) Fix page resume in chromium browsers
 
@@ -943,7 +1014,8 @@ Thanks to everyone that contributed to this release
 
 @schroda, @jesusFx, @QuietBlade, @anvstin, @guohuageng, @plum7x, @HiyoriTUK, @aizhimoran, @JiPaix, @Yuhyeong, @a18ccms, @chancez, @rickymcmuffin, @zmmx, @alexandrejournet, @ibaraki-douji, @nitezs, @misaka10843, @Becods, @skrewde, @xconkhi9x, @cnmorocho, @Wip-Sama, @Kefir2105, @RafieHardinur, @SuperMario229, @Alexandre-P-J, @AriaMoradi, @NathanBnm, @FumoVite, @JoHena, @bandysharif, @DevCoz, @comradekingu, @Zereef, @akabhirav
 
-[unreleased]: https://github.com/suwayomi/suwayomi-webui/compare/v20260726.01...HEAD
+[unreleased]: https://github.com/suwayomi/suwayomi-webui/compare/v20260929.01...HEAD
+[20260929.01]: https://github.com/suwayomi/suwayomi-webui/compare/v20260726.01...v20260929.01
 [20260726.01]: https://github.com/suwayomi/suwayomi-webui/compare/v20260722.01...v20260726.01
 [20260722.01]: https://github.com/suwayomi/suwayomi-webui/compare/v20260509.01...v20260722.01
 [20260509.01]: https://github.com/suwayomi/suwayomi-webui/compare/v20260508.01...v20260509.01

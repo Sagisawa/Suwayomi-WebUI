@@ -311,8 +311,8 @@ msgid "A preview focused web frontend built with svelte"
 msgstr "Előnézet-orientált web frontend Svelte-ben írva"
 
 #: src/features/library/components/LibraryOptionsPanel.tsx
-msgid "A-Z"
-msgstr "A-Z"
+msgid "A—Z"
+msgstr "A—Z"
 
 #: src/features/navigation-bar/NavigationBar.constants.ts
 #: src/features/settings/screens/About.tsx
@@ -383,11 +383,6 @@ msgstr "Összes"
 #: src/features/downloads/screens/DownloadSettings.tsx
 msgid "Allow deleting bookmarked chapters"
 msgstr "Könyvjelzőkhöz adott fejezetek törlésének engedélyezése"
-
-#: src/base/components/inputs/LanguageSelect.tsx
-#: src/features/source/components/SourceLanguageSelect.tsx
-msgid "Allowed Languages"
-msgstr "Engedélyezett Nyelvek"
 
 #: src/features/reader/filters/settings/components/ReaderSettingRGBA.tsx
 msgid "Alpha"
@@ -981,10 +976,6 @@ msgstr "Nem sikerült az összes letöltés eltávolítása a várólistáról"
 msgid "Could not remove non library manga from categories"
 msgstr "Nem sikerült a nem könyvtári manga eltávolítása a kategóriákból"
 
-#: src/features/downloads/components/DownloadQueueChapterCard.tsx
-msgid "Could not remove the download from the queue."
-msgstr "Nem sikerült a letöltés eltávolítása a várólistáról."
-
 #: src/features/backup/screens/Backup.tsx
 #: src/features/backup/screens/Backup.tsx
 msgid "Could not restore backup"
@@ -1487,10 +1478,6 @@ msgstr "Nem sikerült a KOReader Sync szerverről való lecsatlakozás."
 #: src/features/tracker/screens/TrackingSettings.tsx
 msgid "Failed to save changes"
 msgstr "Nem sikerült a változtatások mentése"
-
-#: src/features/settings/screens/Appearance.tsx
-msgid "Feel free to translate the project on"
-msgstr "Segíts a projekt lefordításában"
 
 #: src/features/downloads/components/DeleteChaptersWhileReadingSetting.tsx
 msgid "Fifth to last read chapter"
@@ -2995,26 +2982,6 @@ msgstr "A bejelentkezés a kliens által lesz kezelve."
 msgid "The login will be handled by the server."
 msgstr "A bejelentkezés a szerver által lesz kezelve."
 
-#: src/features/reader/services/ReaderControls.ts
-msgid ""
-"The next chapter has a different scanlator then the current one.\n"
-"Current: {currentScanlator}\n"
-"Next: {nextScanlator}"
-msgstr ""
-"A következő fejezetet másik fordítócsoport fordította.\n"
-"Jelenlegi: {currentScanlator}\n"
-"Következő: {nextScanlator}"
-
-#: src/features/reader/services/ReaderControls.ts
-msgid ""
-"The previous chapter has a different scanlator then the current one.\n"
-"Previous: {nextScanlator}\n"
-"Current: {currentScanlator}"
-msgstr ""
-"Az előző fejezetet másik fordítócsoport fordította.\n"
-"Előző: {nextScanlator}\n"
-"Jelenlegi: {currentScanlator}"
-
 #: src/features/theme/components/CreateThemeDialog.tsx
 msgid "The theme name must be unique and has a limit of 16 characters"
 msgstr ""
@@ -3328,10 +3295,6 @@ msgstr "VUI"
 #: src/base/components/feedback/SnackbarWithDescription.tsx
 msgid "Warning"
 msgstr "Figyelmeztetés"
-
-#: src/features/settings/screens/Appearance.tsx
-msgid "Weblate"
-msgstr "Weblate"
 
 #: src/features/manga/Manga.constants.ts
 #: src/features/reader/settings/ReaderSettings.constants.tsx

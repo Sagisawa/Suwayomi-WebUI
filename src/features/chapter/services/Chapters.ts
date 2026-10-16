@@ -33,11 +33,9 @@ import type {
     ChapterBookmarkInfo,
     ChapterDownloadInfo,
     ChapterIdInfo,
-    ChapterMangaInfo,
     ChapterNumberInfo,
     ChapterReadInfo,
     ChapterScanlatorInfo,
-    ChapterSourceOrderInfo,
 } from '@/features/chapter/Chapter.types.ts';
 import { assertIsDefined } from '@/base/Asserts.ts';
 import { DirectionOffset } from '@/base/Base.types.ts';
@@ -105,15 +103,15 @@ export class Chapters {
         return downloadStatus.data;
     }
 
-    static getReaderUrl<Chapter extends ChapterMangaInfo & ChapterSourceOrderInfo>(chapter: Chapter): string {
-        return AppRoutes.reader.path(chapter.mangaId, chapter.sourceOrder);
-    }
-
     static isDownloading(id: number): boolean {
         const activeDownloadStates = [DownloadState.Downloading, DownloadState.Queued];
         const downloadStatus = Chapters.getDownloadStatusFromCache(id);
 
         return activeDownloadStates.includes(downloadStatus?.state as DownloadState);
+    }
+
+    static getDownloading<Chapter extends ChapterIdInfo>(chapters: Chapter[]): Chapter[] {
+        return chapters.filter((chapter) => Chapters.isDownloading(chapter.id));
     }
 
     static isDownloaded({ isDownloaded }: ChapterDownloadInfo): boolean {
@@ -193,6 +191,15 @@ export class Chapters {
             'download',
             chapterIds.length,
             () => requestManager.addChaptersToDownloadQueue(chapterIds).response,
+            disableConfirmation,
+        );
+    }
+
+    static async cancelDownload(chapterIds: number[], disableConfirmation?: boolean): Promise<void> {
+        return Chapters.executeAction(
+            'download_cancel',
+            chapterIds.length,
+            () => requestManager.removeChaptersFromDownloadQueue(chapterIds).response,
             disableConfirmation,
         );
     }
@@ -329,6 +336,8 @@ export class Chapters {
         switch (action) {
             case 'download':
                 return Chapters.download(chapterIds);
+            case 'download_cancel':
+                return Chapters.cancelDownload(chapterIds);
             case 'delete':
                 return Chapters.delete(chapterIds);
             case 'mark_as_read':
@@ -458,7 +467,7 @@ export class Chapters {
 
         return sortedChapters.reduce(
             (missingChapterCount, chapter, index) =>
-                missingChapterCount + Chapters.getGap(chapter, sortedChapters[index - 1]),
+                missingChapterCount + Chapters.getGap(chapter, sortedChapters[index - 1] ?? { chapterNumber: 0 }),
             0,
         );
     }

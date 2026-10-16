@@ -14,8 +14,7 @@ import type { ComponentProps } from 'react';
 import { memo, useMemo } from 'react';
 import { useTheme } from '@mui/material/styles';
 import { useLingui } from '@lingui/react/macro';
-import type { ReaderBackgroundColor } from '@/features/reader/Reader.types.ts';
-import { ReaderTransitionPageMode, ReadingMode } from '@/features/reader/Reader.types.ts';
+import { ReaderBackgroundColor, ReaderTransitionPageMode, ReadingMode } from '@/features/reader/Reader.types.ts';
 import { isTransitionPageVisible } from '@/features/reader/viewer/pager/ReaderPager.utils.tsx';
 import { useBackButton } from '@/base/hooks/useBackButton.ts';
 import { applyStyles } from '@/base/utils/ApplyStyles.ts';
@@ -53,7 +52,10 @@ const ChapterInfo = ({
     const theme = useTheme();
 
     const readingMode = useReaderSettingsStore((state) => state.readingMode.value);
+    const useAutoBackgroundColorContinuousMode = useReaderSettingsStore('useAutoBackgroundColorContinuousMode');
     const autoBackgroundColor = useReaderPagesStore((state) =>
+        backgroundColor === ReaderBackgroundColor.AUTO &&
+        useAutoBackgroundColorContinuousMode &&
         isContinuousReadingMode(readingMode)
             ? state.pageBackgroundColors[getPage(state.currentPageIndex, state.pages)?.pagesIndex ?? 0]?.color
             : undefined,

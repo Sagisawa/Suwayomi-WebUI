@@ -181,6 +181,7 @@ export interface IReaderSettingsGlobal {
     shouldShowTransitionPage: boolean;
     shouldCropBorders: boolean;
     safeAreaInset: SafeAreaInset;
+    shouldEnterFullscreen: boolean;
 }
 
 export interface IReaderSettingsManga {

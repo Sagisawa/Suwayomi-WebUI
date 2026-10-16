@@ -26,8 +26,8 @@ msgid "A preview focused web frontend built with svelte"
 msgstr "Вебінтерфейс, орієнтований на попередній перегляд, створений за допомогою svelte"
 
 #: src/features/library/components/LibraryOptionsPanel.tsx
-msgid "A-Z"
-msgstr "А-Я"
+msgid "A—Z"
+msgstr "А—Я"
 
 #: src/features/navigation-bar/NavigationBar.constants.ts
 #: src/features/settings/screens/About.tsx
@@ -83,11 +83,6 @@ msgstr "Всі"
 #: src/features/downloads/screens/DownloadSettings.tsx
 msgid "Allow deleting bookmarked chapters"
 msgstr "Дозволити видалення глав із закладками"
-
-#: src/base/components/inputs/LanguageSelect.tsx
-#: src/features/source/components/SourceLanguageSelect.tsx
-msgid "Allowed Languages"
-msgstr "Дозволені мови"
 
 #: src/features/manga/components/details/MangaDetails.tsx
 msgid "Artist"
@@ -355,10 +350,6 @@ msgstr "Не вдалося видалити завантаження з чер�
 msgid "Could not remove non library manga from categories"
 msgstr "Не вдалося видалити з категорій мангу, що не є в бібліотеці"
 
-#: src/features/downloads/components/DownloadQueueChapterCard.tsx
-msgid "Could not remove the download from the queue."
-msgstr "Не вдалося видалити завантаження з черги."
-
 #: src/features/backup/screens/Backup.tsx
 #: src/features/backup/screens/Backup.tsx
 msgid "Could not restore backup"
@@ -613,10 +604,6 @@ msgstr ""
 "\n"
 "Після зміни цього налаштування перейдіть на сторінку \"Про застосунок\", перевірте наявність оновлення веб-інтерфейсу та встановіть його"
 "\n"
-
-#: src/features/settings/screens/Appearance.tsx
-msgid "Feel free to translate the project on"
-msgstr "Не соромтеся перекладати проєкт на"
 
 #: src/features/downloads/components/DeleteChaptersWhileReadingSetting.tsx
 msgid "Fifth to last read chapter"
@@ -1516,10 +1503,6 @@ msgstr "Ім'я користувача"
 msgid "VUI"
 msgstr "VUI"
 
-#: src/features/settings/screens/Appearance.tsx
-msgid "Weblate"
-msgstr "Weblate"
-
 #: src/features/reader/settings/ReaderSettings.constants.tsx
 msgid "Webtoon"
 msgstr "Вебтун"
@@ -1603,8 +1586,8 @@ msgstr "Робочий стіл"
 
 #. placeholder {0}: entry.sourceTitle
 #: src/features/migration/components/migration-entry/MigrationDestinationEntry.tsx
-msgid "Destination - {0}"
-msgstr "Призначення - {0}"
+msgid "Destination — {0}"
+msgstr "Призначення — {0}"
 
 #: src/features/settings/Settings.constants.ts
 msgid "Disable authentication"

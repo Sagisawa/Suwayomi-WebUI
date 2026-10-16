@@ -392,8 +392,8 @@ msgid "A preview focused web frontend built with svelte"
 msgstr "Ένα web frontend με έμφαση στην προεπισκόπηση, φτιαγμένο με svelte"
 
 #: src/features/library/components/LibraryOptionsPanel.tsx
-msgid "A-Z"
-msgstr "Α-Ω"
+msgid "A—Z"
+msgstr "Α—Ω"
 
 #: src/features/migration/components/migration-entry/MigrationEntrySearchExcludeActions.tsx
 #: src/features/migration/screens/MigrationExecute.tsx
@@ -480,11 +480,6 @@ msgstr "Όλα"
 #: src/features/downloads/screens/DownloadSettings.tsx
 msgid "Allow deleting bookmarked chapters"
 msgstr "Να επιτρέπεται η διαγραφή κεφαλαίων με σελιδοδείκτη"
-
-#: src/base/components/inputs/LanguageSelect.tsx
-#: src/features/source/components/SourceLanguageSelect.tsx
-msgid "Allowed Languages"
-msgstr "Επιτρεπόμενες γλώσσες"
 
 #: src/features/reader/filters/settings/components/ReaderSettingRGBA.tsx
 msgid "Alpha"
@@ -1144,10 +1139,6 @@ msgstr "Δεν ήταν δυνατή η αφαίρεση όλων των λήψ�
 msgid "Could not remove non library manga from categories"
 msgstr "Δεν ήταν δυνατή η αφαίρεση manga εκτός βιβλιοθήκης από τις κατηγορίες"
 
-#: src/features/downloads/components/DownloadQueueChapterCard.tsx
-msgid "Could not remove the download from the queue."
-msgstr "Δεν ήταν δυνατή η αφαίρεση της λήψης από την ουρά."
-
 #: src/features/backup/screens/Backup.tsx
 msgid "Could not restore backup"
 msgstr "Δεν ήταν δυνατή η επαναφορά αντιγράφου ασφαλείας"
@@ -1395,8 +1386,8 @@ msgstr "Επιτραπέζιος"
 
 #. placeholder {0}: entry.sourceTitle
 #: src/features/migration/components/migration-entry/MigrationDestinationEntry.tsx
-msgid "Destination - {0}"
-msgstr "Προορισμός - {0}"
+msgid "Destination — {0}"
+msgstr "Προορισμός — {0}"
 
 #: src/features/device/screens/DeviceSetting.tsx
 #: src/features/settings/screens/Settings.tsx
@@ -1707,10 +1698,6 @@ msgstr ""
 "\n"
 "Αφού αλλάξεις αυτή τη ρύθμιση, πήγαινε στη σελίδα «Σχετικά» και έλεγξε για "
 "ενημέρωση webUI και εγκατέστησέ τη"
-
-#: src/features/settings/screens/Appearance.tsx
-msgid "Feel free to translate the project on"
-msgstr "Μη διστάσεις να μεταφράσεις το project στο"
 
 #: src/features/downloads/components/DeleteChaptersWhileReadingSetting.tsx
 msgid "Fifth to last read chapter"
@@ -3449,8 +3436,8 @@ msgid "Source Configuration"
 msgstr "Διαμόρφωση πηγής"
 
 #: src/features/migration/components/migration-entry/MigrationSourceEntry.tsx
-msgid "Source entry - {sourceTitle}"
-msgstr "Εγγραφή πηγής - {sourceTitle}"
+msgid "Source entry — {sourceTitle}"
+msgstr "Εγγραφή πηγής — {sourceTitle}"
 
 #: src/features/chapter/components/ChapterOptions.tsx
 msgid "Source title"
@@ -3622,16 +3609,6 @@ msgstr ""
 "Ο πελάτης μπορεί να κλείσει. Η μετεγκατάσταση θα συνεχιστεί μόλις ανοίξει "
 "ξανά στην ίδια συσκευή που ξεκίνησε."
 
-#: src/features/reader/services/ReaderControls.ts
-msgid ""
-"The next chapter has a different scanlator then the current one.\n"
-"Current: {currentScanlator}\n"
-"Next: {nextScanlator}"
-msgstr ""
-"Το επόμενο κεφάλαιο έχει διαφορετικό scanlator από το τρέχον.\n"
-"Τρέχον: {currentScanlator}\n"
-"Επόμενο: {nextScanlator}"
-
 #: src/features/backup/screens/Backup.tsx
 msgid "The path to the directory on the server where automated backups should get saved in"
 msgstr ""
@@ -3653,16 +3630,6 @@ msgstr ""
 #: src/features/settings/screens/WebUISettings.tsx
 msgid "The path to the electron installation on the server"
 msgstr "Η διαδρομή προς την εγκατάσταση του Electron στον διακομιστή"
-
-#: src/features/reader/services/ReaderControls.ts
-msgid ""
-"The previous chapter has a different scanlator then the current one.\n"
-"Previous: {nextScanlator}\n"
-"Current: {currentScanlator}"
-msgstr ""
-"Το προηγούμενο κεφάλαιο έχει διαφορετικό scanlator από το τρέχον.\n"
-"Προηγούμενο: {nextScanlator}\n"
-"Τρέχον: {currentScanlator}"
 
 #: src/features/theme/components/CreateThemeDialog.tsx
 msgid "The theme name must be unique and has a limit of 16 characters"
@@ -4021,10 +3988,6 @@ msgstr "VUI"
 #: src/base/components/feedback/SnackbarWithDescription.tsx
 msgid "Warning"
 msgstr "Προειδοποίηση"
-
-#: src/features/settings/screens/Appearance.tsx
-msgid "Weblate"
-msgstr "Weblate"
 
 #: src/features/manga/Manga.constants.ts
 #: src/features/reader/settings/ReaderSettings.constants.tsx

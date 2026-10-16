@@ -120,6 +120,8 @@ import type {
     RemoveExtensionStoreMutationVariables,
     ReorderChapterDownloadMutation,
     ReorderChapterDownloadMutationVariables,
+    ReorderChapterDownloadsMutation,
+    ReorderChapterDownloadsMutationVariables,
     ResetWebuiUpdateStatusMutation,
     ResetWebuiUpdateStatusMutationVariables,
     RestoreBackupMutation,
@@ -200,6 +202,8 @@ import type {
     ValidateBackupQueryVariables,
     WebuiUpdateSubscription,
     WebuiUpdateSubscriptionVariables,
+    WebviewClearCacheCookiesMutation,
+    WebviewClearCacheCookiesMutationVariables,
 } from '@/lib/graphql/generated/graphql.ts';
 import type {
     CreateBackupInput,
@@ -280,6 +284,7 @@ import {
     ENQUEUE_CHAPTER_DOWNLOAD,
     ENQUEUE_CHAPTER_DOWNLOADS,
     REORDER_CHAPTER_DOWNLOAD,
+    REORDER_CHAPTER_DOWNLOADS,
     START_DOWNLOADER,
     STOP_DOWNLOADER,
 } from '@/lib/graphql/download/DownloaderMutation.ts';
@@ -355,6 +360,7 @@ import { GET_EXTENSION_STORE, GET_EXTENSION_STORES } from '@/lib/graphql/extensi
 import { SYNC_SUBSCRIPTION } from '@/lib/graphql/sync/SyncSubscription.ts';
 import { START_SYNC } from '@/lib/graphql/sync/SyncMutation.ts';
 import { GET_SYNC_STATUS } from '@/lib/graphql/sync/SyncQuery.ts';
+import { WEBVIEW_CLEAR_CACHE_COOKIES } from '@/lib/graphql/web-view/WebViewMutation.ts';
 
 enum GQLMethod {
     QUERY = 'QUERY',
@@ -2066,9 +2072,8 @@ export class RequestManager {
 
         const cachedPages = this.cache.getResponseFor<Set<number>>(CACHE_PAGES_KEY, getVariablesFor(0)) ?? new Set();
         const cachedResults = [...cachedPages]
-            .map(
-                (cachedPage) =>
-                    this.cache.getResponseFor<MutationDataResult>(CACHE_RESULTS_KEY, getVariablesFor(cachedPage))!,
+            .map((cachedPage) =>
+                this.cache.getResponseFor<MutationDataResult>(CACHE_RESULTS_KEY, getVariablesFor(cachedPage))!,
             )
             .sort((a, b) => a.size - b.size);
         const areFetchingInitialPages = !!this.cache.getResponseFor<boolean>(
@@ -3418,6 +3423,62 @@ export class RequestManager {
         return [wrappedMutate, result];
     }
 
+    public useReorderChaptersInDownloadQueue(
+        options?: MutationHookOptions<ReorderChapterDownloadsMutation, ReorderChapterDownloadsMutationVariables>,
+    ): AbortableApolloUseMutationResponse<ReorderChapterDownloadsMutation, ReorderChapterDownloadsMutationVariables> {
+        const [mutate, result] = this.doRequest(GQLMethod.USE_MUTATION, REORDER_CHAPTER_DOWNLOADS, undefined, options);
+
+        const wrappedMutate = (mutationOptions: Parameters<typeof mutate>[0]) => {
+            const variables = mutationOptions?.variables?.input;
+            const cachedDownloadStatus = this.graphQLClient.client.readFragment<
+                GetDownloadStatusQuery['downloadStatus']
+            >({
+                id: 'DownloadStatus:{}',
+                fragment: DOWNLOAD_STATUS_FIELDS,
+                fragmentName: 'DOWNLOAD_STATUS_FIELDS',
+            });
+
+            if (!variables) {
+                throw new Error('useReorderChapterInDownloadQueue: no variables passed');
+            }
+
+            if (!cachedDownloadStatus) {
+                throw new Error('useReorderChapterInDownloadQueue: there are no cached results');
+            }
+
+            const movedChapterIds = new Set(variables.reorders.map(({ chapterId }) => chapterId));
+
+            const movedChapters = variables.reorders
+                .map(({ chapterId }) => cachedDownloadStatus.queue.find(({ chapter }) => chapter.id === chapterId))
+                .filter((download) => download != null);
+
+            const queueWithoutMovedChapters = cachedDownloadStatus.queue.filter(
+                ({ chapter }) => !movedChapterIds.has(chapter.id),
+            );
+
+            const updatedQueue = variables.reorders.reduce(
+                (queue, reorder, index) => queue.toSpliced(reorder.to, 0, movedChapters[index]),
+                queueWithoutMovedChapters,
+            );
+
+            return mutate({
+                optimisticResponse: {
+                    __typename: 'Mutation',
+                    reorderChapterDownloads: {
+                        __typename: 'ReorderChapterDownloadPayload',
+                        downloadStatus: {
+                            ...cachedDownloadStatus,
+                            queue: updatedQueue,
+                        },
+                    },
+                },
+                ...mutationOptions,
+            });
+        };
+
+        return [wrappedMutate, result];
+    }
+
     public addChaptersToDownloadQueue(
         ids: number[],
         options?: MutationOptions<EnqueueChapterDownloadsMutation, EnqueueChapterDownloadsMutationVariables>,
@@ -3562,30 +3623,13 @@ export class RequestManager {
         return this.doRequest<DownloadStatusSubscription, DownloadStatusSubscriptionVariables>(
             GQLMethod.USE_SUBSCRIPTION,
             DOWNLOAD_STATUS_SUBSCRIPTION,
-            { input: { maxUpdates: 30 } },
+            { input: {} },
             {
                 ...options,
                 onData: (onDataOptions) => {
                     const downloadChanged = onDataOptions.data.data?.downloadStatusChanged;
 
                     const { cache } = this.graphQLClient.client;
-
-                    if (downloadChanged?.omittedUpdates) {
-                        const cacheData = (cache as InMemoryCache).extract();
-
-                        this.graphQLClient.client.refetchQueries({
-                            updateCache() {
-                                for (const [id, value] of Object.entries(cacheData)) {
-                                    if ((value as any)?.__typename === 'DownloadType') {
-                                        cache.evict({ id });
-                                    }
-                                }
-                                cache.evict({ id: 'DownloadStatus:{}' });
-                                cache.evict({ fieldName: 'downloadStatus' });
-                            },
-                        });
-                        return;
-                    }
 
                     if (downloadChanged?.state) {
                         cache.modify({
@@ -3669,7 +3713,7 @@ export class RequestManager {
         return this.doRequest<UpdaterSubscription, UpdaterSubscriptionVariables>(
             GQLMethod.USE_SUBSCRIPTION,
             UPDATER_SUBSCRIPTION,
-            { input: { maxUpdates: 30 } },
+            { input: {} },
             {
                 ...options,
                 onData: (onDataOptions) => {
@@ -3677,26 +3721,15 @@ export class RequestManager {
 
                     const cache = this.graphQLClient.client.cache as InMemoryCache;
 
-                    if (!updatesChanged?.omittedUpdates) {
-                        updatesChanged?.mangaUpdates
-                            .filter((update) => update.status === MangaJobStatus.Complete)
-                            .forEach((update) =>
-                                Object.keys(cache.extract().ROOT_QUERY as object)
-                                    .filter(
-                                        (key) =>
-                                            key.includes('chapters') && key.includes(`mangaId":${update.manga.id}`),
-                                    )
-                                    .forEach((key) => cache.evict({ fieldName: key })),
-                            );
-                        return;
-                    }
-
-                    this.graphQLClient.client.refetchQueries({
-                        updateCache() {
-                            cache.evict({ fieldName: 'chapters' });
-                            cache.evict({ fieldName: 'libraryUpdateStatus' });
-                        },
-                    });
+                    updatesChanged?.mangaUpdates
+                        .filter((update) => update.status === MangaJobStatus.Complete)
+                        .forEach((update) =>
+                            Object.keys(cache.extract().ROOT_QUERY as object)
+                                .filter(
+                                    (key) => key.includes('chapters') && key.includes(`mangaId":${update.manga.id}`),
+                                )
+                                .forEach((key) => cache.evict({ fieldName: key })),
+                        );
                 },
             } as SubscriptionHookOptions<UpdaterSubscription, UpdaterSubscriptionVariables>,
         ) as useSubscription.Result<UpdaterSubscription>;
@@ -3956,6 +3989,12 @@ export class RequestManager {
             { refreshToken: refreshToken ?? undefined },
             options,
         );
+    }
+
+    public useClearWebViewCookiesCache(
+        options?: MutationOptions<WebviewClearCacheCookiesMutation, WebviewClearCacheCookiesMutationVariables>,
+    ): AbortableApolloUseMutationResponse<WebviewClearCacheCookiesMutation, WebuiUpdateSubscriptionVariables> {
+        return this.doRequest(GQLMethod.USE_MUTATION, WEBVIEW_CLEAR_CACHE_COOKIES, {}, options);
     }
 }
 

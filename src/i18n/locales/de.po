@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-01-12T20:43:50.799Z\n"
-"PO-Revision-Date: 2026-07-21 02:01+0000\n"
+"PO-Revision-Date: 2026-09-23 14:51+0000\n"
 "Last-Translator: Constantin Piber <cp.piber@gmail.com>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/suwayomi/suwayomi-"
 "webui/de/>\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2026.8.dev0\n"
+"X-Generator: Weblate 2026.10.dev0\n"
 "X-Message-Format: ICU\n"
 
 #: src/features/navigation-bar/NavigationBar.constants.ts
@@ -32,8 +32,8 @@ msgid "A preview focused web frontend built with svelte"
 msgstr "Ein mit svelte erstelltes Web Frontend mit Fokus auf die Vorschau"
 
 #: src/features/library/components/LibraryOptionsPanel.tsx
-msgid "A-Z"
-msgstr "A-Z"
+msgid "A—Z"
+msgstr "A—Z"
 
 #: src/features/navigation-bar/NavigationBar.constants.ts
 #: src/features/settings/screens/About.tsx
@@ -102,11 +102,6 @@ msgstr "Alle"
 #: src/features/downloads/screens/DownloadSettings.tsx
 msgid "Allow deleting bookmarked chapters"
 msgstr "Erlaube das Löschen von mit Lesezeichen versehenen Kapiteln"
-
-#: src/base/components/inputs/LanguageSelect.tsx
-#: src/features/source/components/SourceLanguageSelect.tsx
-msgid "Allowed Languages"
-msgstr "Aktivierte Sprachen"
 
 #: src/features/reader/filters/settings/components/ReaderSettingRGBA.tsx
 msgid "Alpha"
@@ -646,10 +641,6 @@ msgstr "Es konnten nicht alle Downloads aus der Warteschlange entfernt werden"
 msgid "Could not remove non library manga from categories"
 msgstr "Nicht in Bibliothek gespeicherte Manga konnten aus Kategorie nicht entfernen werden"
 
-#: src/features/downloads/components/DownloadQueueChapterCard.tsx
-msgid "Could not remove the download from the queue."
-msgstr "Der Download konnte nicht aus der Warteschlange entfernt werden."
-
 #: src/features/backup/screens/Backup.tsx
 #: src/features/backup/screens/Backup.tsx
 msgid "Could not restore backup"
@@ -1161,10 +1152,6 @@ msgstr ""
 "\n"
 "Nachdem du diese Einstellung geändert hast, solltest du zur \"Über\"-Seite "
 "gehen, nach einem webUI Update suchen, und es installieren"
-
-#: src/features/settings/screens/Appearance.tsx
-msgid "Feel free to translate the project on"
-msgstr "Feel free to translate the project on"
 
 #: src/features/downloads/components/DeleteChaptersWhileReadingSetting.tsx
 msgid "Fifth to last read chapter"
@@ -2760,16 +2747,6 @@ msgstr "Die Anmeldung erfolgt durch den Klient."
 msgid "The login will be handled by the server."
 msgstr "Die Anmeldung erfolgt über den Server."
 
-#: src/features/reader/services/ReaderControls.ts
-msgid ""
-"The next chapter has a different scanlator then the current one.\n"
-"Current: {currentScanlator}\n"
-"Next: {nextScanlator}"
-msgstr ""
-"Das nächste Kapitel hat einen anderen Scanlator als das Aktuelle.\n"
-"Aktuell: {currentScanlator}\n"
-"Nächstes: {nextScanlator}"
-
 #: src/features/backup/screens/Backup.tsx
 msgid "The path to the directory on the server where automated backups should get saved in"
 msgstr "Der Pfad zum Verzeichnis auf dem Server, in dem automatisierte Backups gespeichert werden sollen"
@@ -2785,16 +2762,6 @@ msgstr "Der Pfad zum Verzeichnis am Server, wo Dateien der lokalen Quelle gespei
 #: src/features/settings/screens/WebUISettings.tsx
 msgid "The path to the electron installation on the server"
 msgstr "Der Pfad zur Electron-Installation am Server"
-
-#: src/features/reader/services/ReaderControls.ts
-msgid ""
-"The previous chapter has a different scanlator then the current one.\n"
-"Previous: {nextScanlator}\n"
-"Current: {currentScanlator}"
-msgstr ""
-"Das vorherige Kapitel hat einen anderen Scanlator als das Aktuelle.\n"
-"Vorheriges: {nextScanlator}\n"
-"Aktuell: {currentScanlator}"
 
 #: src/features/theme/components/CreateThemeDialog.tsx
 msgid "The theme name must be unique and has a limit of 16 characters"
@@ -3118,10 +3085,6 @@ msgstr "VUI"
 #: src/base/components/feedback/SnackbarWithDescription.tsx
 msgid "Warning"
 msgstr "Warnung"
-
-#: src/features/settings/screens/Appearance.tsx
-msgid "Weblate"
-msgstr "Weblate"
 
 #: src/features/manga/Manga.constants.ts
 #: src/features/reader/settings/ReaderSettings.constants.tsx
@@ -3855,8 +3818,8 @@ msgstr "Aktuelle Quelle"
 
 #. placeholder {0}: entry.sourceTitle
 #: src/features/migration/components/migration-entry/MigrationDestinationEntry.tsx
-msgid "Destination - {0}"
-msgstr "Ziel - {0}"
+msgid "Destination — {0}"
+msgstr "Ziel — {0}"
 
 #: src/features/migration/screens/MigrationExecute.tsx
 msgid "Done"
@@ -3972,8 +3935,8 @@ msgstr "Ausgewählt"
 
 #: src/features/migration/components/migration-entry/MigrationSourceEntry.tsx
 #: src/features/migration/components/migration-entry/MigrationSourceEntry.tsx
-msgid "Source entry - {sourceTitle}"
-msgstr "Quelleintrag - {sourceTitle}"
+msgid "Source entry — {sourceTitle}"
+msgstr "Quelleintrag — {sourceTitle}"
 
 #: src/features/migration/screens/MigrationSearch.tsx
 msgid "Start migration"
@@ -4160,14 +4123,8 @@ msgstr ""
 
 #. placeholder {0}: t(SYNC_STATE_TRANSLATION[syncState])
 #: src/features/settings/screens/ServerSettings.tsx
-msgid "- State: {0}"
-msgstr "- Status: {0}"
-
-#. placeholder {0}: otherChapters.length
-#: src/features/updates/components/ChapterUpdateCard.tsx
-msgid "{0, plural, one {Show # more chapter} other {Show # more chapters}}"
-msgstr ""
-"{0, plural, one {Zeige # weiteres Kapitel} other {Zeige # weitere Kapitel}}"
+msgid "— State: {0}"
+msgstr "— Status: {0}"
 
 #: src/features/extension/store/screens/ExtensionStores.tsx
 msgid "{extensionCount, plural, one {# extension} other {# extensions}}"
@@ -4428,3 +4385,221 @@ msgstr "Aktiviere automatische Hintergrundfarbe im kontinuierlichen Lesemodus"
 #: src/features/settings/screens/ServerSettings.tsx
 msgid "Last sync: {syncDate}"
 msgstr "Letzer Sync: {syncDate}"
+
+#: src/lib/HelperFunctions.ts
+msgid "Copied to clipboard"
+msgstr "In Zwischenablage kopiert"
+
+#: src/lib/HelperFunctions.ts
+msgid "Could not copy to clipboard"
+msgstr "Konnte nicht in Zwischenablage kopieren"
+
+#: src/features/settings/components/DebugInformation.tsx
+msgid "Could not load data"
+msgstr "Daten konnten nicht geladen werden"
+
+#: src/features/library/components/LibraryToolbarMenu.tsx
+msgid "Could not open random entry"
+msgstr "Konnte zufälligen Eintrag nicht öffnen"
+
+#: src/features/settings/screens/About.tsx
+msgid "Debug information"
+msgstr "Debug-Information"
+
+#: src/features/reader/settings/behaviour/ReaderBehaviourSettings.tsx
+msgid "Keep screen on"
+msgstr "Bildschirm an lassen"
+
+#: src/features/library/components/LibraryToolbarMenu.tsx
+msgid "Open random entry"
+msgstr "Zufälligen Eintrag öffnen"
+
+#: src/features/library/components/LibraryOptionsPanel.tsx
+msgid "Random"
+msgstr "Zufall"
+
+#: src/features/settings/components/DebugInformation.tsx
+msgid "Show"
+msgstr "Anzeigen"
+
+#. placeholder {0}: reorders.length
+#: src/features/downloads/screens/DownloadQueue.tsx
+msgid "{0, plural, one {Could not reorder download} other {Could not reorder downloads}}"
+msgstr ""
+"{0, plural, one {Download konnte nicht umsortiert werden} other {Downloads "
+"konnten nicht umsortiert werden}}"
+
+#: src/features/chapter/Chapter.constants.ts
+msgid "{count, plural, one {Could not cancel the download} other {Could not cancel downloads}}"
+msgstr ""
+"{count, plural, one {Download konnte nicht abgebrochen werden} other "
+"{Downloads konnten nicht abgebrochen werden}}"
+
+#: src/features/chapter/Chapter.constants.ts
+msgid "{count, plural, one {Download canceled} other {# downloads canceled}}"
+msgstr ""
+"{count, plural, one {Download abgebrochen} other {# Downloads abgebrochen}}"
+
+#: src/features/chapter/Chapter.constants.ts
+msgid "{count, plural, one {You are about to cancel one download} other {You are about to cancel # downloads}}"
+msgstr ""
+"{count, plural, one {Du bist dabei, einen Download abzubrechen} other {Du "
+"bist dabei, # Downloads abzubrechen}}"
+
+#: src/features/global-search/screens/SearchAll.tsx
+msgid "{libraryMangaCount, plural, one {# entry in library} other {# entries in library}}"
+msgstr ""
+"{libraryMangaCount, plural, one {# Eintrag in Bibliothek} other {# Einträge "
+"in Bibliothek}}"
+
+#: src/features/manga/components/details/MangaNotes.tsx
+msgid "Add a private note about this manga"
+msgstr "Private Notiz über diesen Manga hinzufügen"
+
+#: src/features/manga/components/details/MangaNotes.tsx
+msgid "Add notes"
+msgstr "Notizen hinzufügen"
+
+#: src/features/downloads/components/DownloadQueueChapterCard.tsx
+msgid "Cancel all for this series"
+msgstr "Alle für diese Serie abbrechen"
+
+#: src/features/chapter/Chapter.constants.ts
+msgid "Cancel download"
+msgstr "Download abbrechen"
+
+#: src/features/chapter/Chapter.constants.ts
+msgid "Cancel downloads of selected"
+msgstr "Download von Ausgewählten abbrechen"
+
+#: src/features/settings/screens/ServerSettings.tsx
+msgid "Clear cookies and cache"
+msgstr "Cookies entfernen und Cache leeren"
+
+#: src/features/manga/components/details/MangaNotes.tsx
+msgid "Clear notes"
+msgstr "Notizen entfernen"
+
+#: src/features/settings/screens/ServerSettings.tsx
+msgid "Cleared WebView cookies and cache"
+msgstr "WebView Cookies und Cache geleert"
+
+#: src/features/settings/screens/ServerSettings.tsx
+msgid "Could not clear WebView cookies and cache"
+msgstr "Konnte WebView Cookies und Cache nicht entleeren"
+
+#: src/features/library/components/LibraryOptionsPanel.tsx
+msgid "Could not reset filters"
+msgstr "Filter konnte nicht zurückgesetzt werden"
+
+#: src/features/downloads/screens/DownloadQueue.tsx
+msgid "Could not retry failed downloads"
+msgstr "Fehlerhafte Downloads konnte nicht wiederholt werden"
+
+#: src/features/manga/components/details/MangaNotes.tsx
+msgid "Could not save notes"
+msgstr "Notizen konnten nicht gespeichert werden"
+
+#: src/features/manga/components/details/MangaNotes.tsx
+msgid "Edit notes"
+msgstr "Notizen bearbeiten"
+
+#: src/base/components/inputs/LanguageSelect.tsx
+msgid "Enabled languages"
+msgstr "Aktivierte Sprachen"
+
+#: src/features/source/components/SourceLanguageSelect.tsx
+msgid "Enabled languages and sources"
+msgstr "Aktivierte Sprachen und Quellen"
+
+#: src/features/settings/screens/Appearance.tsx
+msgid "Feel free to translate the project on Weblate (<0>WebUI</0> and <1>Server</1>)"
+msgstr ""
+"Feel free to translate the project on Weblate (<0>WebUI</0> and <1>Server</"
+"1>)"
+
+#: src/features/reader/settings/general/ReaderGeneralSettings.tsx
+msgid "Fullscreen"
+msgstr "Vollbild"
+
+#: src/features/downloads/components/DownloadQueueChapterCard.tsx
+msgid "Move series to bottom"
+msgstr "Serie nach unten verschieben"
+
+#: src/features/downloads/components/DownloadQueueChapterCard.tsx
+msgid "Move series to top"
+msgstr "Serie nach oben verschieben"
+
+#: src/features/downloads/components/DownloadQueueChapterCard.tsx
+msgid "Move to bottom"
+msgstr "Nach unten verschieben"
+
+#: src/features/downloads/components/DownloadQueueChapterCard.tsx
+msgid "Move to top"
+msgstr "Nach oben verschieben"
+
+#: src/features/manga/components/details/MangaNotes.tsx
+msgid "Notes"
+msgstr "Notizen"
+
+#: src/features/manga/components/details/MangaNotes.tsx
+msgid "Notes saved"
+msgstr "Notizen gespeichert"
+
+#: src/features/downloads/screens/DownloadQueue.tsx
+msgid "Retry all"
+msgstr "Alle wiederholen"
+
+#: src/features/sync/components/SyncButton.tsx
+msgid "Sync now"
+msgstr "Jetzt synchronisieren"
+
+#: src/features/chapter/components/buttons/ChapterCardExpandButton.tsx
+msgid "{count, plural, one {Show # more chapter} other {Show # more chapters}}"
+msgstr ""
+"{count, plural, one {Zeige # weiteres Kapitel} other {Zeige # weitere "
+"Kapitel}}"
+
+#: src/features/library/components/LibraryOptionsPanel.tsx
+msgid "and"
+msgstr "und"
+
+#: src/features/library/components/LibraryOptionsPanel.tsx
+msgid "Filter mode"
+msgstr "Filter Modus"
+
+#: src/features/library/screens/LibrarySettings.tsx
+msgid "Fuzzy search"
+msgstr "Fuzzy-Suche"
+
+#: src/features/library/screens/LibrarySettings.tsx
+msgid "Match the library search even with typos or words in a different order, and show the closest matches first"
+msgstr ""
+"Suche auch mit Tippfehler oder Wörtern in unterschiedlicher Reihenfolge, und "
+"zeige das beste Resultat zuerst"
+
+#: src/features/library/components/LibraryOptionsPanel.tsx
+msgid "or"
+msgstr "oder"
+
+#: src/base/components/AppbarSearch.tsx
+msgid "Recent searches"
+msgstr "Letzte Suchen"
+
+#: src/features/reader/services/ReaderControls.ts
+msgid "The next chapter has a different scanlator than the current one.\n"
+"Current: {currentScanlator}\n"
+"Next: {nextScanlator}"
+msgstr ""
+"Das nächste Kapitel hat einen anderen Scanlator als das Aktuelle.\n"
+"Aktuell: {currentScanlator}\n"
+"Nächstes: {nextScanlator}"
+
+#: src/features/reader/services/ReaderControls.ts
+msgid "The previous chapter has a different scanlator than the current one.\n"
+"Previous: {nextScanlator}\n"
+"Current: {currentScanlator}"
+msgstr ""
+"Das vorherige Kapitel hat einen anderen Scanlator als das Aktuelle.\n"
+"Vorheriges: {nextScanlator}\n"
+"Aktuell: {currentScanlator}"

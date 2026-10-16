@@ -21,7 +21,7 @@ import PopupState, { bindMenu, bindTrigger } from 'material-ui-popup-state';
 import { useLingui } from '@lingui/react/macro';
 import { CustomTooltip } from '@/base/components/CustomTooltip.tsx';
 import { getDateString } from '@/base/utils/DateHelper.ts';
-import { DownloadStateIndicator } from '@/base/components/downloads/DownloadStateIndicator.tsx';
+import { DownloadStateIndicatorCircular } from '@/base/components/downloads/DownloadStateIndicatorCircular.tsx';
 import { ChapterActionMenuItems } from '@/features/chapter/components/actions/ChapterActionMenuItems.tsx';
 import { Menu } from '@/base/components/menu/Menu.tsx';
 import { Chapters } from '@/features/chapter/services/Chapters.ts';
@@ -43,6 +43,8 @@ import type {
 import { MediaQuery } from '@/base/utils/MediaQuery.tsx';
 import type { ChapterType } from '@/lib/graphql/generated/graphql-base.types.ts';
 import { usePress } from '@/base/hooks/usePress.ts';
+import { AppRoutes } from '@/base/AppRoute.constants.ts';
+import { ReaderService } from '@/features/reader/services/ReaderService.ts';
 
 type TChapter = ChapterIdInfo &
     ChapterMangaInfo &
@@ -96,6 +98,9 @@ export const ChapterCard = memo((props: IProps) => {
 
     const handleClick = (event: MouseEvent | TouchEvent) => {
         if (!isSelecting) {
+            event.preventDefault();
+            event.stopPropagation();
+            ReaderService.openReader(chapter, true);
             return;
         }
 
@@ -123,21 +128,19 @@ export const ChapterCard = memo((props: IProps) => {
             {(popupState) => (
                 <Stack sx={{ pt: 1, px: 1 }}>
                     <Card
-                        sx={{
-                            ...applyStyles(mode === 'reader' && isActiveChapter, {
-                                backgroundColor: 'primary.main',
-                            }),
-                        }}
+                        sx={applyStyles(mode === 'reader' && isActiveChapter, {
+                            backgroundColor: 'primary.main',
+                        })}
                     >
                         <CardActionArea
                             component={Link}
-                            to={Chapters.getReaderUrl(chapter)}
+                            to={AppRoutes.reader.path(chapter.mangaId, chapter.sourceOrder)}
+                            state={Chapters.getReaderOpenChapterLocationState(chapter, true)}
                             onContextMenu={preventMobileContextMenu}
                             sx={MediaQuery.preventMobileContextMenuSx()}
                             style={{
                                 color: theme.palette.text[chapter.isRead ? 'disabled' : 'primary'],
                             }}
-                            state={Chapters.getReaderOpenChapterLocationState(chapter, true)}
                             replace={mode === 'reader'}
                             {...longPressBind(popupState.open)}
                         >
@@ -146,7 +149,7 @@ export const ChapterCard = memo((props: IProps) => {
                                     title={showChapterNumber ? `${t`Chapter`} ${chapter.chapterNumber}` : chapter.name}
                                     secondaryText={chapter.scanlator}
                                     ternaryText={`${getDateString(Number(chapter.uploadDate ?? 0), true)}${
-                                        isDownloaded ? ` • ${t`Downloaded`}` : ''
+                                        isDownloaded ? ` — ${t`Downloaded`}` : ''
                                     }`}
                                     infoIcons={
                                         chapter.isBookmarked && (
@@ -175,7 +178,7 @@ export const ChapterCard = memo((props: IProps) => {
                                     }}
                                 />
 
-                                <DownloadStateIndicator
+                                <DownloadStateIndicatorCircular
                                     chapterId={chapter.id}
                                     color={
                                         mode === 'reader' && isActiveChapter
@@ -184,7 +187,7 @@ export const ChapterCard = memo((props: IProps) => {
                                     }
                                 />
 
-                                <Stack sx={{ minHeight: '48px' }}>
+                                <Stack>
                                     {selected === null ? (
                                         <CustomTooltip title={t`Options`}>
                                             <IconButton

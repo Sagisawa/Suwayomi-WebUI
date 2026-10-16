@@ -41,17 +41,18 @@ import { useNetwork, useOrientation, useViewportSize } from '@mantine/hooks';
 import type {
     GetCategoriesLibraryQuery,
     GetCategoriesLibraryQueryVariables,
-    GetLibraryMangaCountQuery,
+    GetMangasCountQuery,
+    GetMangasCountQueryVariables,
     GetTrackersSettingsQuery,
 } from '@/lib/graphql/generated/graphql.ts';
-import { GET_LIBRARY_MANGA_COUNT } from '@/lib/graphql/manga/MangaQuery.ts';
+import { GET_MANGAS_COUNT } from '@/lib/graphql/manga/MangaQuery.ts';
 import { GET_CATEGORIES_LIBRARY } from '@/lib/graphql/category/CategoryQuery.ts';
 import { getCategoryMetadata } from '@/features/category/services/CategoryMetadata.ts';
-import sumBy from 'lodash/fp/sumBy';
 import groupBy from 'lodash/fp/groupBy';
 import mapValues from 'lodash/fp/mapValues';
 import { GET_TRACKERS_SETTINGS } from '@/lib/graphql/tracker/TrackerQuery.ts';
 import { Trackers } from '@/features/tracker/services/Trackers.ts';
+import pickBy from 'lodash/fp/pickBy';
 
 const PRIVACY_UNSAFE_SERVER_SETTINGS: (keyof ServerSettings)[] = [
     'socksProxyUsername',
@@ -65,6 +66,15 @@ const PRIVACY_UNSAFE_SERVER_SETTINGS: (keyof ServerSettings)[] = [
     'databasePassword',
     'syncYomiApiKey',
     'jwtAudience',
+    'socksProxyHost',
+    'socksProxyPort',
+    'electronPath',
+    'downloadsPath',
+    'localSourcePath',
+    'flareSolverrUrl',
+    'flareSolverrSessionName',
+    'databaseUrl',
+    'syncYomiHost',
 ];
 const getBrowserDebugInfo = async (serverAddress: string) => {
     const nav = navigator;
@@ -77,7 +87,7 @@ const getBrowserDebugInfo = async (serverAddress: string) => {
     return {
         page: {
             protocol: window.location.protocol,
-            localhost: window.location.hostname.includes('localhost'),
+            localhost: window.location.hostname.includes('localhost') || window.location.hostname.includes('127.0.0.1'),
             matchesServerAddress: window.location.origin === serverAddress,
         },
 
@@ -208,25 +218,27 @@ const getBrowserDebugInfo = async (serverAddress: string) => {
 };
 const mapObjectToMetadata = (obj: object, tabs: number = 0) => (
     <Stack>
-        {Object.entries(obj).map(([key, value], index, array) =>
-            !!value && typeof value === 'object' && !Array.isArray(value) ? (
-                <Fragment key={key}>
-                    {index >= 1 && <br />}
-                    <TypographyMaxLines component="span">{indent(key, tabs, ' ')}</TypographyMaxLines>
-                    {mapObjectToMetadata(value, tabs + 2)}
-                    {array[index + 1] && typeof array[index + 1]?.[1] !== 'object' && <br />}
-                </Fragment>
-            ) : (
-                <Metadata
-                    key={key}
-                    title={indent(key, tabs, ' ')}
-                    value={indent(JSON.stringify(value), 1, ' ')}
-                    titleProps={{ component: 'span' }}
-                    valueProps={{ component: 'span' }}
-                    stackProps={{ sx: { display: 'inline-block' } }}
-                />
-            ),
-        )}
+        {Object.entries(obj)
+            .filter(([key]) => key !== '__typename')
+            .map(([key, value], index, array) =>
+                !!value && typeof value === 'object' && !Array.isArray(value) ? (
+                    <Fragment key={key}>
+                        {index >= 1 && <br />}
+                        <TypographyMaxLines component="span">{indent(key, tabs, ' ')}</TypographyMaxLines>
+                        {mapObjectToMetadata(value, tabs + 2)}
+                        {array[index + 1] && typeof array[index + 1]?.[1] !== 'object' && <br />}
+                    </Fragment>
+                ) : (
+                    <Metadata
+                        key={key}
+                        title={indent(key, tabs, ' ')}
+                        value={indent(JSON.stringify(value), 1, ' ')}
+                        titleProps={{ component: 'span' }}
+                        valueProps={{ component: 'span' }}
+                        stackProps={{ sx: { display: 'inline-block' } }}
+                    />
+                ),
+            )}
     </Stack>
 );
 
@@ -240,10 +252,14 @@ export const DebugInformation = () => {
         GetCategoriesLibraryQuery,
         GetCategoriesLibraryQueryVariables
     >(GET_CATEGORIES_LIBRARY, {});
-    const libraryMangasCountRequest = requestManager.useGetMangas<GetLibraryMangaCountQuery>(
-        GET_LIBRARY_MANGA_COUNT,
-        {},
+    const libraryMangasCountRequest = requestManager.useGetMangas<GetMangasCountQuery, GetMangasCountQueryVariables>(
+        GET_MANGAS_COUNT,
+        { condition: { inLibrary: true } },
     );
+    const nonLibraryCategoryMangasCountRequest = requestManager.useGetMangas<
+        GetMangasCountQuery,
+        GetMangasCountQueryVariables
+    >(GET_MANGAS_COUNT, { condition: { inLibrary: false }, filter: { categoryId: { isNull: false } } });
     const extensionStoresRequest = requestManager.useGetExtensionStores();
     const extensionsRequest = requestManager.useGetExtensionList({ variables: { condition: { isInstalled: true } } });
     const sourcesRequest = requestManager.useGetSourceList();
@@ -271,11 +287,7 @@ export const DebugInformation = () => {
     const categories = categoriesRequest.data?.categories.nodes ?? STABLE_EMPTY_ARRAY;
 
     const libraryMangasCount = libraryMangasCountRequest.data?.mangas.totalCount ?? 0;
-    const nonLibraryMangasInCategoriesCount = useMemo(() => {
-        const categoriesEntriesCount = sumBy((category) => category.mangas.totalCount, categories);
-
-        return categoriesEntriesCount - libraryMangasCount;
-    }, [categories, libraryMangasCount]);
+    const nonLibraryMangasInCategoriesCount = nonLibraryCategoryMangasCountRequest.data?.mangas.totalCount ?? 0;
 
     const extensionStoresCount = extensionStoresRequest.data?.extensionStores.totalCount ?? 0;
     const extensions = extensionsRequest.data?.extensions.nodes ?? STABLE_EMPTY_ARRAY;
@@ -286,10 +298,10 @@ export const DebugInformation = () => {
     const nsfwSourcesCount = useMemo(() => Sources.filter(sources, { isNsfw: true }).length, [sources]);
     const pinnedSourcesCount = useMemo(() => Sources.filter(sources, { pinned: true }).length, [sources]);
 
-    const webUIUpdateStatus = webUIUpdateStatusRequest.data?.getWebUIUpdateStatus ?? STABLE_EMPTY_OBJECT;
-    const globalUpdateStatus = globalUpdateRequest.data?.libraryUpdateStatus ?? STABLE_EMPTY_OBJECT;
-    const downloadStatus = downloadStatusRequest.data?.downloadStatus ?? STABLE_EMPTY_OBJECT;
-    const syncStatus = syncStatusRequest.data?.lastSyncStatus ?? STABLE_EMPTY_OBJECT;
+    const webUIUpdateStatus = webUIUpdateStatusRequest.data?.getWebUIUpdateStatus;
+    const globalUpdateStatus = globalUpdateRequest.data?.libraryUpdateStatus;
+    const downloadStatus = downloadStatusRequest.data?.downloadStatus;
+    const syncStatus = syncStatusRequest.data?.lastSyncStatus;
 
     const trackers = trackersRequest.data?.trackers.nodes ?? STABLE_EMPTY_ARRAY;
 
@@ -298,19 +310,20 @@ export const DebugInformation = () => {
     const debugInfo = useMemo(
         () => ({
             About: {
-                Server: {
-                    Version: aboutServer?.version,
-                    Channel: aboutServer?.buildType,
-                    'Build time': aboutServer?.buildTime
-                        ? epochToDate(Number(aboutServer.buildTime)).toISOString()
-                        : '-',
-                },
                 WebUI: {
                     Version: aboutWebUI?.tag,
                     Channel: aboutWebUI?.channel,
                     'Update timestamp': aboutWebUI?.updateTimestamp
                         ? dayjs(Number(aboutWebUI.updateTimestamp)).toISOString()
                         : '-',
+                },
+                Server: {
+                    Version: aboutServer?.version,
+                    Channel: aboutServer?.buildType,
+                    'Build time': aboutServer?.buildTime
+                        ? epochToDate(Number(aboutServer.buildTime)).toISOString()
+                        : '-',
+                    'Platform info': aboutServer?.platformInfo,
                 },
             },
             Settings: {
@@ -349,6 +362,10 @@ export const DebugInformation = () => {
                 'Sources pinned': pinnedSourcesCount,
                 'Show NSFW': clientSettings.settings.showNsfw,
                 'Browse languages': clientSettings.settings.browseLanguages,
+                'Visible sources by language': pickBy(
+                    (_value, key) => clientSettings.settings.browseLanguages.includes(key),
+                    mapValues((items) => (items as unknown[]).length, groupBy('lang', sources)),
+                ),
             },
             Library: {
                 Entries: libraryMangasCount,
@@ -370,12 +387,12 @@ export const DebugInformation = () => {
                 'Tokens expired': trackers.filter((tracker) => tracker.isTokenExpired).length,
                 ...mapValues((items) => (items as unknown[])[0], groupBy('name', trackers)),
             },
-            'Update Status': globalUpdateStatus.jobsInfo,
+            'Update Status': globalUpdateStatus?.jobsInfo,
             'Download Status': {
-                State: downloadStatus.state,
+                State: downloadStatus?.state,
                 Entries: {
-                    Total: downloadStatus.queue.length,
-                    ...mapValues((items) => (items as unknown[]).length, groupBy('state', downloadStatus.queue)),
+                    Total: downloadStatus?.queue.length,
+                    ...mapValues((items) => (items as unknown[]).length, groupBy('state', downloadStatus?.queue)),
                 },
             },
             'Sync status': syncStatus,
@@ -448,7 +465,14 @@ export const DebugInformation = () => {
         sourcesRequest.loading ||
         serverSettingsRequest.loading ||
         clientSettings.loading ||
-        defaultReaderSettings.loading;
+        defaultReaderSettings.loading ||
+        categoriesRequest.loading ||
+        libraryMangasCountRequest.loading ||
+        nonLibraryCategoryMangasCountRequest.loading ||
+        webUIUpdateStatusRequest.loading ||
+        downloadStatusRequest.loading ||
+        syncStatusRequest.loading ||
+        trackersRequest.loading;
     if (isLoading) {
         return <LoadingPlaceholder />;
     }
@@ -460,49 +484,35 @@ export const DebugInformation = () => {
         sourcesRequest.error ||
         serverSettingsRequest.error ||
         clientSettings.request.error ||
-        defaultReaderSettings.request.error;
+        defaultReaderSettings.request.error ||
+        categoriesRequest.error ||
+        libraryMangasCountRequest.error ||
+        nonLibraryCategoryMangasCountRequest.error ||
+        webUIUpdateStatusRequest.error ||
+        downloadStatusRequest.error ||
+        syncStatusRequest.error ||
+        trackersRequest.error;
     if (hasError) {
         return (
             <EmptyView
                 message={t`Could not load data`}
                 retry={() => {
-                    if (aboutRequest.error) {
-                        aboutRequest.refetch().catch(defaultPromiseErrorHandler('DebugInformation::aboutRequest'));
-                    }
-
-                    if (extensionStoresRequest.error) {
-                        extensionStoresRequest
-                            .refetch()
-                            .catch(defaultPromiseErrorHandler('DebugInformation::extensionStoresRequest'));
-                    }
-
-                    if (extensionsRequest.error) {
-                        extensionsRequest
-                            .refetch()
-                            .catch(defaultPromiseErrorHandler('DebugInformation::extensionsRequest'));
-                    }
-
-                    if (sourcesRequest.error) {
-                        sourcesRequest.refetch().catch(defaultPromiseErrorHandler('DebugInformation::sourcesRequest'));
-                    }
-
-                    if (serverSettingsRequest.error) {
-                        serverSettingsRequest
-                            .refetch()
-                            .catch(defaultPromiseErrorHandler('DebugInformation::serverSettingsRequest'));
-                    }
-
-                    if (clientSettings.request.error) {
-                        clientSettings.request
-                            .refetch()
-                            .catch(defaultPromiseErrorHandler('DebugInformation::clientSettings'));
-                    }
-
-                    if (defaultReaderSettings.request.error) {
-                        defaultReaderSettings.request
-                            .refetch()
-                            .catch(defaultPromiseErrorHandler('DebugInformation::defaultReaderSettings'));
-                    }
+                    Promise.all([
+                        aboutRequest.error && aboutRequest.refetch(),
+                        extensionStoresRequest.error && extensionStoresRequest.refetch(),
+                        extensionsRequest.error && extensionsRequest.refetch(),
+                        sourcesRequest.error && sourcesRequest.refetch(),
+                        serverSettingsRequest.error && serverSettingsRequest.refetch(),
+                        clientSettings.request.error && clientSettings.request.refetch(),
+                        defaultReaderSettings.request.error && defaultReaderSettings.request.refetch(),
+                        categoriesRequest.error && categoriesRequest.refetch(),
+                        libraryMangasCountRequest.error && libraryMangasCountRequest.refetch(),
+                        nonLibraryCategoryMangasCountRequest.error && nonLibraryCategoryMangasCountRequest.refetch(),
+                        webUIUpdateStatusRequest.error && webUIUpdateStatusRequest.refetch(),
+                        downloadStatusRequest.error && downloadStatusRequest.refetch(),
+                        syncStatusRequest.error && syncStatusRequest.refetch(),
+                        trackersRequest.error && trackersRequest.refetch(),
+                    ]).catch(defaultPromiseErrorHandler('DebugInformation::retry'));
                 }}
             />
         );
