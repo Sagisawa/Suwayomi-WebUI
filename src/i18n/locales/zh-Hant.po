@@ -4376,3 +4376,12 @@ msgstr ""
 #: src/features/settings/screens/ServerSettings.tsx
 msgid "Shows a dialog in case the version of the server has changed"
 msgstr "當伺服器版本變更時，將顯示提示對話框"
+
+#: src/features/reader/overlay/navigation/desktop/quick-settings/ReaderNavBarDesktopQuickSettings.tsx
+#: src/features/reader/settings/behaviour/ReaderBehaviourSettings.tsx
+msgid "Auto crop borders"
+msgstr "自動裁切"
+
+#: src/features/reader/settings/behaviour/ReaderBehaviourSettings.tsx
+msgid "Automatically crop blank borders around manga pages"
+msgstr "自動裁切去掉漫畫頁面四周的空白區域"

@@ -4373,3 +4373,13 @@ msgstr "调试信息"
 #: src/features/settings/components/DebugInformation.tsx
 msgid "Show"
 msgstr "展示"
+
+#: src/features/reader/overlay/navigation/desktop/quick-settings/ReaderNavBarDesktopQuickSettings.tsx
+#: src/features/reader/settings/behaviour/ReaderBehaviourSettings.tsx
+msgid "Auto crop borders"
+msgstr "自动剪裁"
+
+#: src/features/reader/settings/behaviour/ReaderBehaviourSettings.tsx
+msgid "Automatically crop blank borders around manga pages"
+msgstr "自动裁剪去掉漫画页面四周的空白区域"
+
