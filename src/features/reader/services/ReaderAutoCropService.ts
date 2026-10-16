@@ -214,6 +214,38 @@ const detectCropBounds = (imageData: ImageData, width: number, height: number): 
     };
 };
 
+const MAX_CROP_CACHE_SIZE = 150;
+
+const setCropCache = (src: string, resultUrl: string): void => {
+    if (cropCache.has(src)) {
+        const oldUrl = cropCache.get(src);
+        if (oldUrl && oldUrl !== src && oldUrl !== resultUrl && oldUrl.startsWith('blob:')) {
+            URL.revokeObjectURL(oldUrl);
+        }
+        cropCache.delete(src);
+    } else if (cropCache.size >= MAX_CROP_CACHE_SIZE) {
+        const oldestKey = cropCache.keys().next().value;
+        if (oldestKey) {
+            const oldestUrl = cropCache.get(oldestKey);
+            if (oldestUrl && oldestUrl !== oldestKey && oldestUrl.startsWith('blob:')) {
+                URL.revokeObjectURL(oldestUrl);
+            }
+            cropCache.delete(oldestKey);
+        }
+    }
+    cropCache.set(src, resultUrl);
+};
+
+export const clearReaderAutoCropCache = (): void => {
+    cropCache.forEach((url, src) => {
+        if (url !== src && url.startsWith('blob:')) {
+            URL.revokeObjectURL(url);
+        }
+    });
+    cropCache.clear();
+    pendingPromises.clear();
+};
+
 export const cropPageBorders = async (imageSrc: string): Promise<string> => {
     if (cropCache.has(imageSrc)) {
         return cropCache.get(imageSrc)!;
@@ -224,6 +256,9 @@ export const cropPageBorders = async (imageSrc: string): Promise<string> => {
     }
 
     const promise = (async () => {
+        let canvas: HTMLCanvasElement | OffscreenCanvas | null = null;
+        let cropCanvas: HTMLCanvasElement | OffscreenCanvas | null = null;
+
         try {
             const img = new Image();
             img.crossOrigin = 'anonymous';
@@ -236,11 +271,11 @@ export const cropPageBorders = async (imageSrc: string): Promise<string> => {
 
             const { naturalWidth: width, naturalHeight: height } = img;
             if (!width || !height || width < 50 || height < 50) {
-                cropCache.set(imageSrc, imageSrc);
+                setCropCache(imageSrc, imageSrc);
                 return imageSrc;
             }
 
-            const canvas =
+            canvas =
                 typeof OffscreenCanvas !== 'undefined'
                     ? new OffscreenCanvas(width, height)
                     : document.createElement('canvas');
@@ -253,7 +288,7 @@ export const cropPageBorders = async (imageSrc: string): Promise<string> => {
                 | null;
 
             if (!ctx) {
-                cropCache.set(imageSrc, imageSrc);
+                setCropCache(imageSrc, imageSrc);
                 return imageSrc;
             }
 
@@ -262,11 +297,11 @@ export const cropPageBorders = async (imageSrc: string): Promise<string> => {
 
             const bounds = detectCropBounds(imageData, width, height);
             if (!bounds) {
-                cropCache.set(imageSrc, imageSrc);
+                setCropCache(imageSrc, imageSrc);
                 return imageSrc;
             }
 
-            const cropCanvas =
+            cropCanvas =
                 typeof OffscreenCanvas !== 'undefined'
                     ? new OffscreenCanvas(bounds.width, bounds.height)
                     : document.createElement('canvas');
@@ -279,7 +314,7 @@ export const cropPageBorders = async (imageSrc: string): Promise<string> => {
                 | null;
 
             if (!cropCtx) {
-                cropCache.set(imageSrc, imageSrc);
+                setCropCache(imageSrc, imageSrc);
                 return imageSrc;
             }
 
@@ -305,17 +340,24 @@ export const cropPageBorders = async (imageSrc: string): Promise<string> => {
             }
 
             if (!blob) {
-                cropCache.set(imageSrc, imageSrc);
+                setCropCache(imageSrc, imageSrc);
                 return imageSrc;
             }
 
             const croppedUrl = URL.createObjectURL(blob);
-            cropCache.set(imageSrc, croppedUrl);
+            setCropCache(imageSrc, croppedUrl);
             return croppedUrl;
         } catch {
-            cropCache.set(imageSrc, imageSrc);
             return imageSrc;
         } finally {
+            if (canvas) {
+                canvas.width = 0;
+                canvas.height = 0;
+            }
+            if (cropCanvas) {
+                cropCanvas.width = 0;
+                cropCanvas.height = 0;
+            }
             pendingPromises.delete(imageSrc);
         }
     })();

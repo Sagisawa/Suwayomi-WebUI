@@ -9,5 +9,3 @@ dev-dist/*
 
 src/lib/graphql/schema.json
 .oxlintrc.jsonc
-src/i18n/locales/*.js
-
