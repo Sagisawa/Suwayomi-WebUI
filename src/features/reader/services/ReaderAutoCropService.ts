@@ -67,7 +67,9 @@ const detectCropBounds = (imageData: ImageData, width: number, height: number): 
             }
         }
 
-        if (count === 0) {return { r: 255, g: 255, b: 255, lum: 255 };}
+        if (count === 0) {
+            return { r: 255, g: 255, b: 255, lum: 255 };
+        }
         const r = totalR / count;
         const g = totalG / count;
         const b = totalB / count;
@@ -324,7 +326,9 @@ export const cropPageBorders = async (imageSrc: string): Promise<string> => {
 
 export const useReaderAutoCrop = (src: string | undefined, enabled: boolean): string | undefined => {
     const [finalSrc, setFinalSrc] = useState<string | undefined>(() => {
-        if (!src || !enabled) {return src;}
+        if (!src || !enabled) {
+            return src;
+        }
         return cropCache.get(src) ?? src;
     });
 
